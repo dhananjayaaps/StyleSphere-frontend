@@ -1,0 +1,33 @@
+.parameters-section {
+    font-family: Arial, sans-serif;
+  }
+  
+  .true-status {
+    color: green; /* Color for parameters with true status */
+  }
+  
+  .false-status {
+    color: red; /* Color for parameters with false status */
+  }
+  
+  .status-tick {
+    color: green; /* Color for tick (✔️) */
+    margin-left: 5px;
+  }
+  
+  .status-cross {
+    color: red; /* Color for cross (❌) */
+    margin-left: 5px;
+  }
+  
+  .value {
+    font-weight: bold;
+  }
+  
+  .white-text{
+    color: aliceblue;
+  }
+
+  .parameters-section{
+    padding-bottom: 10px;
+  }

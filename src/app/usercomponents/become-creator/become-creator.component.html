@@ -1,0 +1,96 @@
+<!-- nav bar -->
+<app-user-navbar></app-user-navbar>
+
+<!-- main -->
+<div class="pb-6 bg-background mt-9">
+
+  <div class="relative h-96 md:h-[27rem] bg-background flex items-center justify-start text-center">
+    <img src="assets/images/img.png" alt="abstract-mountain-background"
+         class="absolute object-cover w-full h-full bg-repeat opacity-45" />
+    <div class="relative z-10 items-center p-4 ml-4 text-left md:ml-16">
+      <h1 class="mb-5 text-4xl font-extrabold md:text-7xl text-pink1 opacity-80">Become a Creator</h1>
+      <p class="text-lg font-light text-metawhite md:text-xl">
+        Unlock your potential and join our community of <br class="hidden md:inline">
+        talented AR/VR creators. || Share your unique 3D <br class="hidden md:inline">
+        models, reach a global audience, and monetize <br class="hidden md:inline">
+        your creativity.
+      </p>
+      <!-- Add the button here -->
+      <button
+      routerLink="/register-creator"
+      class="min-w-[250px] h-[30px] mt-6 py-2 px-6 bg-darkpink text-metawhite font-semibold rounded-lg hover:bg-darkpurple focus:outline-none focus:ring-2 focus:ring-pink-500">
+        Become a Creator
+      </button>
+    </div>
+  </div>
+
+
+  <div class="bg-background p-8">
+    <h2 class="text-4xl font-bold text-metawhite text-center mb-8">How it works</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 md:px-12">
+      <!-- Card 1 -->
+      <div class="rounded-lg p-[2px] border-2 border-darkpink hover:bg-gradient-to-r from-darkpink to-darkpurple p-1 max-w-[90%] mx-auto md:ml-8">
+        <div class="bg-card rounded-lg p-6">
+          <div class="flex flex-col items-center mb-4">
+            <img aria-hidden="true" alt="sign-up-icon"
+                 src="https://openui.fly.dev/openui/48x48.svg?text=➡️"
+                 class="w-12 h-12 mb-4" />
+            <h3 class="text-xl font-semibold text-metawhite">Sign Up and Set Up Your Profile</h3>
+          </div>
+          <p class="text-metawhite text-center">
+            Join Our Community: Create an account and set up your profile to showcase your expertise and connect with fellow creators.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="rounded-lg p-[2px] border-2 border-darkpink hover:bg-gradient-to-r from-darkpink to-darkpurple p-1 max-w-[90%] mx-auto">
+        <div class="bg-card rounded-lg p-6">
+          <div class="flex flex-col items-center mb-4">
+            <img aria-hidden="true" alt="upload-icon"
+                 src="https://openui.fly.dev/openui/48x48.svg?text=⬆️"
+                 class="w-12 h-12 mb-4" />
+            <h3 class="text-xl font-semibold text-metawhite">Upload Your AR/VR 3D Models</h3>
+          </div>
+          <p class="text-metawhite text-center">
+            Share Your Creations: Easily upload your 3D models, ensuring they meet our quality standards. Provide detailed descriptions and tags to help users discover your work.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="rounded-lg p-[2px] border-2 border-darkpink hover:bg-gradient-to-r from-darkpink to-darkpurple p-1 max-w-[90%] mx-auto md:mr-8">
+        <div class="bg-card rounded-lg p-6">
+          <div class="flex flex-col items-center mb-4">
+            <img aria-hidden="true" alt="monetize-icon"
+                 src="https://openui.fly.dev/openui/48x48.svg?text=⬇️"
+                 class="w-12 h-12 mb-4" />
+            <h3 class="text-xl font-semibold text-metawhite">Monetize and Engage</h3>
+          </div>
+          <p class="text-metawhite text-center">
+            Earn and Interact: List your models for sale in our marketplace. Earn revenue from your creations and engage with buyers through reviews and feedback to build your reputation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- sign in cord -->
+<div class="bg-purple2 relative text-metawhite px-12 mb-10  rounded-lg mx-12  flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8">
+  <div class="flex-1 p-8 relative">
+    <div class="border-b-2 border-darkpink w-16 mx-auto md:mx-0 my-4"></div>
+      <h2 class="text-3xl font-light mb-4 text-metawhite">
+        Ready to Elevate<br />
+        <span class="text-primary font-bold">Your AR/VR Projects?</span>
+      </h2>
+    <p class="text-muted-foreground mb-6">Unlock limitless possibilities with our premium AR/VR 3D models.<br>Join our vibrant community of creators and enthusiasts today!</p>
+    <button routerLink="/register-creator" class="border border-metawhite  text-metawhite hover:text-metawhite p-4 h-8 w-40 py-2 text-sm rounded-xl hover:bg-lightpurple">Become a Creator</button>
+  </div>
+  <div class="flex justify-end ">
+    <img src="assets/images/img03.png" alt="Person using AR/VR headset with neon graphics" class=" flex rounded-lg h-96" />
+  </div>
+</div>
+
+
+  <!-- footer -->
+  <app-footer></app-footer>

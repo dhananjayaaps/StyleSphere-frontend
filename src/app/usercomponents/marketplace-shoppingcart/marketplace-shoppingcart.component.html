@@ -1,0 +1,102 @@
+<!-- nav - bar -->
+<app-user-navbar></app-user-navbar>
+
+<!-- main -->
+<div class="bg-background pb-6 mt-16">
+
+
+
+  <div class="relative h-20 md:h-24 bg-background flex items-center justify-center text-center">
+    <img src="assets/images/Register complete.png" alt="abstract-mountain-background"
+      class="absolute w-full h-full object-cover bg-repeat opacity-85" />
+    <div class="relative z-10 items-center md:mr-16 text-center px-0">
+      <p class="text-4xl md:text-5xl font-bold  text-metawhite opacity-80 ">Shopping Cart</p>
+    </div>
+  </div>
+
+
+  <div class="bg-background text-metawhite">
+    <div class="container mx-auto p-4">
+      <div class="flex flex-col lg:flex-row mx-auto">
+
+        <!-- Products - Summary -->
+        <div class="w-full lg:w-3/4">
+          <div class="bg-purple2 pb-4 rounded-xl  shadow-bgpurple text-metawhite mt-6 lg:mt-0">
+            <div class="bg-darkpink p-4 rounded-t-xl text-wrap text-xl font-light flex justify-between">
+              <span class="w-2/4">Product</span>
+              <span class="w-1/4">Price</span>
+              <span class="w-1/4 text-center">Action</span>
+            </div>
+
+            <div *ngFor="let item of cartItems" class="p-4 flex justify-between items-center border-b border-purple-800">
+              <span class="w-2/4 flex items-center"> Elephant
+                <img src="{{item.imageUrl}}" alt="Elephant" class="w-20 h-20 ml-8"></span>
+              <span class="w-1/4">{{item.price==0?"Free":item.price+"$"}}</span>
+
+              <button (click)="removeItem(item.modelId)" class="w-1/4 rounded-xl h-10 text-center bg-pink2">Remove</button>
+            </div>
+
+
+
+          </div>
+        </div>
+
+
+        <!-- Order - Summary -->
+        <div class="w-full lg:w-1/4 mt-8 lg:mt-0 lg:ml-4">
+          <div class="bg-purple2 rounded-xl  shadow-md text-metawhite ">
+            <div class="bg-darkpink p-4 rounded-t-xl text-center text-xl font-light">
+              Order Summary
+            </div>
+
+            <div class="my-6 p-6">
+              <div class="flex justify-between my-2">
+                <span>Sub Total</span>
+                <span>${{getTotal()}}</span>
+              </div>
+
+
+
+              <div class="flex justify-between my-2">
+                <span class="text-darkpink">Discounts </span>
+                <span></span>
+              </div>
+            </div>
+
+            <div class="flex px-6 justify-between text-xl font-bold border-t border-white pt-4">
+              <span>Total</span>
+              <span>${{getTotal()}}</span>
+            </div>
+            <div class="flex  justify-center text-xl  p-4">
+              <button (click)="ProceedtoCheckout(cartItems)" class="bg-darkpink px-10 rounded-xl text-metawhite  text-center w-3/4 text-lg mt-4">
+                Proceed to Checkout
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div class="relative h-60  bg-background   flex items-center justify-center text-center">
+    <img src="assets/images/img marketcheckout.png" alt="background"
+      class="absolute  w-full h-60 object-cover bg-repeat opacity-50" />
+    <div class="relative z-10">
+      <h2 class="text-2xl font-light text-metawhite">"Experience the future of architecture with the Contemporary
+        Cultural <br>Center 3D model. Perfectly designed for virtual tours, educational <br>purposes, and detailed
+        project visualizations, bringing modern <br>innovation to your fingertips."</h2>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+  <!-- footer -->
+  <app-footer></app-footer>

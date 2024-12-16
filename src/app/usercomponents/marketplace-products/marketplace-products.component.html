@@ -1,0 +1,207 @@
+<!-- nav - bar -->
+<app-user-navbar></app-user-navbar>
+<p-dialog *ngIf="isBrowser"  [showHeader]="false" [modal]="true" [(visible)]="openDialog" [draggable]="false"
+           [resizable]="false" styleClass="custom-s-dialog">
+
+  <div class=" min-w-[700px] max-w-[700px] min-h-[600px] bg-purple1  rounded-lg shadow-lg w-full max-w-4xl max-h-full overflow-x-hidden ">
+    <div class="flex justify-between items-center mb-4 bg-gradient-to-r from-purple2 to-darkpink">
+      <div class="flex items-center p-4">
+        <h2 class="text-metawhite text-xl font-semibold">Search With AI</h2>
+      </div>
+      <div class="flex items-center p-4">
+        <button (click)="openDialog = false" class="bg-darkpink text-metawhite px-4 py-2 rounded-lg">X</button>
+      </div>
+    </div>
+    <div class="flex flex-row w-full gap-3 items-center px-10 py-6">
+      <form class="space-y-4 w-full flex flex-col text-sm" [formGroup]="request">
+        <textarea
+          class="search-bar w-full resize-none bg-background text-metawhite rounded-lg border-2 border-darkpurple focus:outline-none p-4"
+          rows="3"
+          placeholder="Enter your query here..."
+          cols="30"
+          pInputTextarea
+          [autoResize]="false"
+
+          formControlName="query"
+
+        >
+        </textarea>
+      </form>
+      <button (click)="SearchAI()" class="bg-darkpink h-10 w-fit buttonAI text-metawhite rounded-lg ">Search</button>
+    </div>
+    <div class="px-5"><p-divider /></div>
+
+    <div class="w-full flex flex-col justify-center items-center" *ngIf="!AiSearchResults">
+      <h2 class="text-2xl font-bold text-darkpink w-fit" > Results Appear Here </h2>
+    </div>
+    <span *ngIf="isLoading" class="w-full flex items-center justify-center h-64">
+      <p-progressSpinner
+        styleClass="w-3rem h-3rem"
+        strokeWidth="5"
+        animationDuration=".5s" />
+    </span>
+
+    <span *ngIf="AiSearchResults" >
+    <div class="w-full px-8 py-1"  *ngFor="let model of AiSearchResults">
+      <div class="h-32 bg-metawhite rounded-xl flex flex-row p-4 gap-3" (click)="navigateToDescription(model.modelID)">
+        <img src="{{model.model?.image1Url}}" class="w-36 h-full bg-green500">
+        <div class="w-3/4 flex flex-col justify-between">
+          <h2 class="font-bold text-xl w-full truncate ">Title: {{model.model?.title}} </h2>
+          <p>Price: {{model.model?.price==0?"Free":model.model?.price}}</p>
+          <div class="flex flex-row gap-2">
+            <p-tag [severity]="getSerevitybyFrequency(model.frequency||0)" value="Frequency: {{model.frequency}}" [rounded]="true" />
+            <p-tag [severity]="getSeerveritybyScore(model.score||0)" value="Score : {{model.score}}"  [rounded]="true" />
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+    </span>
+
+  </div>
+</p-dialog>
+<!-- main -->
+<div class="bg-background pb-6 mt-16">
+
+  <!-- Search - Bar -->
+  <div class=" w-full flex justify-end p-6 gap-10">
+    <div class="flex flex-row items-center w-80">
+      <input
+        id="searchQueryInput"
+        type="text"
+        name="searchQueryInput"
+        placeholder="Search models..."
+        [(ngModel)]="searchQuery"
+        (input)="applyFilters()"
+        class="w-full h-12 text-lg text-metawhite rounded-full border-2 border-darkpurple bg-background focus:outline-none search"
+      />
+      <i class="pi pi-search text-darkpurple -ml-10" style="font-size: 1.5rem"></i>
+    </div>
+
+
+
+
+
+    <div class="bs relative  h-12 w-44 flex justify-center items-center" (click)="openDialog=true">
+      <div class="i h-12 w-44 bg-pink2 items-center rounded-xl shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-105 hover:scale-y-105 transition duration-300 ease-out buttonAI">
+      </div>
+      <p class="text-center flex flex-row items-center justify-center gap-1 text-lg text-metawhite font-semibold z-10 pointer-events-none"><i class="pi pi-microchip-ai" style="font-size: 1.1rem"></i> Search With AI</p>
+      <span class="absolute flex h-4 w-4 items-center justify-center top-[5px] right-[5px] transform translate-x-2.5 -translate-y-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#37ff00] opacity-75"></span>
+          <span class="absolute inline-flex rounded-full h-3 w-3 bg-[#37ff00]"></span>
+      </span>
+    </div>
+
+
+
+
+
+  </div>
+
+
+  <!-- Filter - and - Sort - Bar -->
+  <div class="filter-bar flex justify-between items-center p-4 bg-darkpurple text-metawhite">
+    <div class="filter-group flex items-center space-x-4">
+      <div class="filter-item">
+        <label for="category">Category</label>
+        <select id="category" [(ngModel)]="selectedCategory" (change)="applyFilters()">
+          <option *ngFor="let category of categories; let i = index" [value]="i === 0 ? '' : i">
+            {{category}}
+          </option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="price">Price</label>
+        <input type="range" id="price" min="2" max="500" [(ngModel)]="selectedPrice" (change)="applyFilters()" />
+        <span>{{selectedPrice}}</span>
+      </div>
+      <div class="filter-item">
+        <label for="format">Formats</label>
+        <select id="format" [(ngModel)]="selectedFormat" (change)="applyFilters()">
+          <option *ngFor="let format of formats" [value]="format">{{format}}</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="license">Licenses</label>
+        <select id="license" [(ngModel)]="selectedLicense" (change)="applyFilters()">
+          <option *ngFor="let license of licenses" [value]="license">{{license}}</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="rating">Rating</label>
+        <select id="rating" [(ngModel)]="selectedRating" (change)="applyFilters()">
+          <option *ngFor="let rating of ratings" [value]="rating">{{rating}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="sort-group">
+      <label for="sort">Sort by</label>
+      <select id="sort" [(ngModel)]="selectedSort" (change)="applyFilters()">
+        <option *ngFor="let sort of sortOptions" [value]="sort">{{sort}}</option>
+      </select>
+    </div>
+  </div>
+
+
+  <div class="flex justify-center p-6">
+    <div class="grid gap-6 mb-10 text-metawhite" style="grid-template-columns: repeat(4, 1fr);">
+      <!-- Use ngFor to iterate over models array -->
+      <div
+        *ngFor="let model of paginatedModels"
+        class="w-64 h-80 mx-auto rounded-lg shadow-lg overflow-hidden hover:scale-105 transition-transform"
+      >
+
+        <div  class="relative w-full h-3/4">
+          <img
+            (click)="navigateToDescription(model.id)"
+            src="{{ model.image }}"
+            alt="{{ model.name }}"
+            class="w-full h-full object-cover"
+          />
+          <span
+            class="absolute top-2 left-2 bg-pink1 text-white text-xs px-2 py-1 rounded-lg"
+            >{{ model.review }}⭐</span
+          >
+          <button
+            (click)="toggleLike(model)"
+            class="absolute top-2 right-2 bg-darkpurple hover:bg-pink1 text-metawhite rounded-full w-8 h-8 flex justify-center items-center"
+          >
+            <i
+              class="pi"
+              [ngClass]="model.isLiked ? 'pi-heart-fill' : 'pi-heart'"
+              style="font-size: 1rem"
+            ></i>
+          </button>
+          <script>  </script>
+        </div>
+        <div class="px-4 py-2 bg-purple2 flex justify-between items-end h-1/4" (click)="navigateToDescription(model.id)">
+          <div>
+            <h2 class="text-lg font-semibold text-metawhite truncate" style="width: 100%;">
+              {{ model.name }}
+            </h2>
+            <p class="text-lg font-bold text-lightgray">{{ model.price }}</p>
+          </div>
+          <div class="flex items-center">
+            <span class="mr-2 text-lightgray">{{ model.likesCount }}</span>
+            <i class="pi pi-heart" style="color: red;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card flex justify-center">
+    <p-paginator (onPageChange)="onModelPageChange($event)" [first]="first" [rows]="rows"
+      [totalRecords]="totalModelRecords" [rowsPerPageOptions]="[12,20,28]"></p-paginator>
+  </div>
+
+
+
+
+
+
+</div>
+<!-- footer -->
+<app-footer></app-footer>

@@ -1,0 +1,151 @@
+<div class="flex justify-center">
+  <button (click)="showRegister()"
+    class="bg-purple2 text-white py-1 p-4 rounded overflow-x-scroll no-scrollbar">Show</button>
+  <p-dialog header="" [(visible)]="visibleRegister" [modal]="true" [draggable]="false"
+     [resizable]="false" styleClass="custom-dialog">
+
+    <div class="bg-purple1  rounded-lg shadow-lg w-full max-w-4xl max-h-full overflow-x-scroll no-scrollbar">
+      <div class="flex justify-between items-center mb-4 bg-gradient-to-r from-purple2 to-darkpink">
+        <div class="flex items-center p-4">
+          <h2 class="text-metawhite text-xl font-semibold">Write Customer Review</h2>
+        </div>
+      </div>
+      <form class="space-y-4 mx-6 mb-6 text-sm" [formGroup]="formGroup">
+
+
+
+        <div class="card flex justify-center pt-3">
+          <p-floatLabel>
+            <input pInputText id="heading" formControlName="heading" />
+            <label for="heading" class="text-metawhite">Heading</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="card flex justify-center pt-3">
+          <p-floatLabel>
+            <textarea
+              rows="5"
+              cols="30"
+              pInputTextarea
+              [autoResize]="true"
+              formControlName="review"
+            >
+            </textarea>
+            <label for="review" class="text-metawhite">Review</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="card flex justify-center pt-3 pb-6 border-b-2 border-darkpink">
+          <label for="rating" class="mr-3 text-metawhite">Rating</label>
+          <p-rating formControlName="rating" [cancel]="false" />
+        </div>
+
+
+
+        <div class="flex items-center">
+          <button class="w-1/3 h-8 mx-auto bg-darkpurple text-metawhite py-2 rounded-lg hover:bg-primary/80">Post Your Review</button>
+        </div>
+      </form>
+
+
+    </div>
+  </p-dialog>
+</div>
+
+
+
+
+<!-- registration page -->
+<!-- <div class="flex justify-center">
+  <button (click)="showRegister()" class="bg-purple2 text-white py-1 p-4 rounded overflow-x-scroll no-scrollbar">Show</button>
+  <p-dialog
+    header=""
+    [(visible)]="visibleRegister"
+    [modal]="true"
+    [draggable]="false"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [resizable]="false"
+    styleClass="custom-dialog">
+
+    <div class="bg-purple1  rounded-lg shadow-lg w-full max-w-4xl max-h-full overflow-x-scroll no-scrollbar">
+      <div class="flex justify-between items-center mb-4 bg-gradient-to-r from-purple2 to-darkpink">
+        <div class="flex items-center">
+          <img src="./assets/images/logo1.png" alt="logo" class="rounded-full mr-2 w-14" />
+          <h2 class="text-metawhite text-xl font-semibold">Register with Us</h2>
+        </div>
+      </div>
+      <form class="space-y-4 mx-6 text-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-4">
+          <div>
+            <label class="block text-metawhite mb-1">First Name</label>
+            <input type="text" placeholder="" class=" p-3 w-full h-8 md:h-10   bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"/>
+          </div>
+          <div>
+            <label class="block text-metawhite mb-1">Last Name</label>
+            <input type="text" placeholder="" class=" p-3 w-full h-8 md:h-10    bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"/>
+          </div>
+          <div>
+            <label class="block  text-metawhite mb-1">Full Name</label>
+            <input type="text" placeholder="" class=" p-3 w-full h-8 md:h-10    bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"/>
+          </div>
+          <div>
+            <label class="block  text-metawhite mb-1">Username</label>
+            <input type="text" placeholder="" class=" p-3 w-full h-8 md:h-10    bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"/>
+          </div>
+          <div>
+            <label class="block  text-metawhite mb-1">Address</label>
+            <input type="text" placeholder="" class=" p-3 w-full h-8 md:h-10    bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"/>
+          </div>
+          <div>
+            <label class="block  text-metawhite mb-1">Email</label>
+            <input type="email" placeholder="" class=" p-3 w-full h-8 md:h-10   bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"/>
+          </div>
+          <div>
+            <label class="block  text-metawhite mb-1">Password</label>
+            <input type="password" placeholder="" class=" p-3 w-full h-8 md:h-10    bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"/>
+          </div>
+          <div>
+            <label class="block  text-metawhite mb-1">Confirm Password</label>
+            <input type="password" placeholder="" class=" p-3 w-full h-8 md:h-10   bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"/>
+          </div>
+        </div>
+        <div class="space-y-2 text-xs">
+          <div class="flex items-center">
+            <input type="checkbox" class="mr-2" />
+            <label class=" text-metawhite">I agree to the Terms of Use and Privacy Policy</label>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" class="mr-2" />
+            <label class=" text-metawhite">I want to receive tips, news, and community content in the newsletter (2x/month).</label>
+          </div>
+        </div>
+        <div class="flex items-center">
+          <button class="w-1/2 h-10 mx-auto bg-darkpurple text-metawhite py-2 rounded-lg hover:bg-primary/80">Create Account</button>
+        </div>
+      </form>
+      <div class="flex text-metawhite items-center text-xs my-4">
+        <hr class="flex-grow border-muted mx-2" />Or
+        <span class="mx-2 text-darkpink text-sm">Sign Up</span>with
+        <hr class="flex-grow border-muted mx-2" />
+      </div>
+      <div class="flex justify-center text-metawhite text-sm space-x-4">
+        <a href="#" class="flex items-center border  border-lightpink justify-center  text-black font-bold w-40 py-2 p-4 rounded-lg">
+          <i class="pi pi-google mr-3" style="font-size: 1rem"></i>
+          Google
+        </a>
+        <a href="#" class="flex items-center border  border-lightpink justify-center  text-black font-bold w-40 py-2 p-4 rounded-lg">
+          <i class="pi pi-facebook mr-3" style="font-size: 1rem"></i>
+          Facebook
+        </a>
+      </div>
+      <p class="text-metawhite text-xs mt-4 text-center">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
+      <p class="text-metawhite text-sm mt-2 text-center">Already have an account? <a href="#" class="text-darkpink hover:underline">Login to your account</a></p>
+      <div class="relative h-20 mt-3  bg-background  flex items-center justify-center text-center">
+        <img src="assets/images/image07.png" alt="background" class="absolute  w-full h-20 object-cover bg-repeat opacity-45" />
+        <div class="relative z-10 mx-3">
+          <p class="text-sm text-metawhite">"Become a part of Metanet and elevate your AR/VR projects. Discover new possibilities, collaborate with peers, and bring your visions to life."</p>
+        </div>
+      </div>
+    </div>
+</p-dialog>
+</div> -->

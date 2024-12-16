@@ -1,0 +1,103 @@
+<!-- nav - bar -->
+<app-user-navbar></app-user-navbar>
+
+<!-- main -->
+<div class="bg-background pb-6 mt-16">
+
+
+  <!-- header -->
+  <app-user-profile-header [user]="false"></app-user-profile-header>
+
+
+  <!-- details - panel -->
+  <div class="bg-purple1  mt-3  p-6 rounded-lg shadow-lg">
+    <p-tabView selectOnFocus="true">
+      <p-tabPanel header="Owned Models">
+
+
+        <div class="flex justify-center">
+          <div class="grid gap-4 mb-10 text-metawhite sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+            <!-- Use ngFor to iterate over models array -->
+            <div *ngFor="let model of OwnedModels" (click)="navigateToDescription(model.model.id)"
+              class="w-[400px] h-80 mx-auto rounded-lg shadow-lg overflow-hidden hover:scale-105 transition-transform">
+              <div class="relative">
+                <img src="{{model.model.image1Url}}" alt="{{model.model.title}}" class="w-full h-60 object-cover" />
+
+
+              </div>
+              <div class="px-4 py-2 bg-purple2 flex justify-between items-center h-20 " >
+                <div>
+                  <h2 class="text-lg font-semibold text-metawhite">{{model.model.title}}</h2>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </p-tabPanel>
+
+      <p-tabPanel header="Likes">
+        <div class="flex justify-center">
+          <div class="grid gap-4 mb-10 text-metawhite sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+            <!-- Use ngFor to iterate over models array -->
+            <div *ngFor="let model of LikedModels"
+                 class="w-[400px] h-80 mx-auto rounded-lg shadow-lg overflow-hidden hover:scale-105 transition-transform">
+              <div class="relative">
+                <img src="{{model.model.image1Url}}" alt="{{model.model.title}}" class="w-full h-60 object-cover cursor-pointer" (click)="navigateToDescription(model.model.id)"/>
+                <button (click)="dislikeModel(model.model.id)"
+                  class="absolute top-2 right-2 bg-darkpurple hover:bg-pink1 text-metawhite rounded-full w-8 h-8 flex justify-center items-center">
+                  <i class="pi pi-heart-fill" style="font-size: 1rem"></i>
+                </button>
+
+              </div>
+              <div class="px-4 py-2 bg-purple2 flex justify-between items-center h-20 cursor-pointer"
+              (click)="navigateToDescription(model.model.id)">
+                <div>
+                  <h2 class="text-lg font-semibold text-metawhite">{{model.model.title}}</h2>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </p-tabPanel>
+<!--      <p-tabPanel header="Uploads">-->
+<!--        <div class="flex justify-end mb-3 h-8">-->
+<!--          <button (click)="showUpload()" class="bg-darkpink text-metawhite rounded-lg px-4 py-2 flex items-center w-1/5 justify-center hover:bg-pink1">-->
+<!--            <i class="pi pi-upload"></i>-->
+<!--            <span class="ml-2">Upload Model</span>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--        <div class="flex justify-between mb-6 text-metawhite">-->
+
+<!--          <div>-->
+<!--            <span class="text-metawhite">Status</span>-->
+<!--            <select class="bg-purple1 ml-6 border-background rounded ">-->
+<!--              <option>All</option>-->
+<!--              <option>Favorites</option>-->
+<!--              <option>Recent</option>-->
+<!--            </select>-->
+<!--          </div>-->
+
+<!--          <div class="">-->
+<!--            Sort By-->
+<!--            <p-button icon="pi pi-star" [text]="true" />-->
+<!--            <p-button icon="pi pi-eye " [text]="true"/>-->
+<!--            <p-button icon="pi pi-clock "[text]="true" />-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </p-tabPanel>-->
+    </p-tabView>
+  </div>
+
+
+
+
+
+</div>
+<!-- footer -->
+<app-footer></app-footer>

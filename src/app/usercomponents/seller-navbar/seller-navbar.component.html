@@ -1,0 +1,71 @@
+<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-8 py-2 bg-background">
+  <div class="flex items-center space-x-4">
+    <a class="font-bold text-metawhite" href="#">
+      <img class="h-12" src="./assets/images/navlogo.png" alt="logo"> <!-- Logo here -->
+    </a>
+  </div>
+
+  <div class="flex items-center space-x-8">
+
+
+
+
+
+    <!-- Become Creator Button -->
+    <button
+      (click)="navigateTo()"
+      class="w-32 h-10 mx-10 text-sm font-medium transition-all duration-300 border rounded-md shadow-md  text-metawhite bg-background border-spacing-1 border-darkpurple hover:bg-lightpink">
+      Switch to Buyer
+    </button>
+    <div class="flex card justify-content-center">
+      <!-- Menu -->
+      <p-menu #menu [model]="items" [popup]="true">
+        <ng-template pTemplate="item" let-item>
+          <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route" class="p-menuitem-link">
+              <span [class]="item.icon"></span>
+              <span class="ml-2">{{ item.label }}</span>
+            </a>
+          </ng-container>
+          <ng-template #elseBlock>
+            <a [href]="item.url" class="p-menuitem-link">
+              <span [class]="item.icon"></span>
+              <span class="ml-2">{{ item.label }}</span>
+            </a>
+          </ng-template>
+        </ng-template>
+      </p-menu>
+
+      <p-button (onClick)="menu.toggle($event)">
+        <img class="w-10 h-10" src="assets/images/avata.jpg" alt="User profile picture" />
+      </p-button>
+    </div>
+    <div class="lg:hidden">
+      <button id="navbar-burger" class="flex items-center navbar-burger text-metawhite">
+        <i class="pi pi-bars"></i>
+      </button>
+    </div>
+  </div>
+
+
+</nav>
+
+<!-- mobile - view -->
+<div id="navbar-menu" class="navbar-menu relative z-50 hidden">
+  <div class="navbar-backdrop fixed inset-0 bg-metablack opacity-25"></div>
+  <nav
+    class="fixed top-0 bottom-0 left-0 flex flex-col w-2/5 max-w-sm px-6 py-6 overflow-y-auto border-r bg-background">
+    <div class="flex items-center justify-center mb-8">
+      <a class="mr-auto text-3xl font-bold leading-none" href="#">
+        <img class="h-14" src="./assets/images/logo1.png" alt="logo"> <!-- Logo here -->
+      </a>
+      <button id="navbar-close" class="navbar-close">
+        <svg class="w-6 h-6 cursor-pointer text-metawhite hover:text-lightpink" xmlns="http://www.w3.org/2000/svg"
+             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+  </nav>
+</div>

@@ -1,0 +1,65 @@
+<div class="card">
+
+
+  <p-table
+    [value]="models"
+    dataKey="id"
+
+    rowGroupMode="subheader"
+    groupRowsBy="user.name"
+    selectionMode="single"
+    [(selection)]="selectedProduct"
+    (onRowSelect)="onRowSelect($event)"
+    [tableStyle]="{'min-width': '70rem'}">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:25%">Name</th>
+        <th style="width:15%">Model</th>
+        <th style="width:20%">Category</th>
+        <th style="width:20%">Price</th>
+        <th style="width:20%">Reviews</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="groupheader" let-customer let-rowIndex="rowIndex" let-expanded="expanded">
+      <tr>
+        <td class="flex flex-row w-full">
+          <button
+            type="button"
+            pButton
+            pRipple
+            [pRowToggler]="customer"
+            class="p-button-text p-button-rounded p-button-plain mr-2"
+            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+          </button>
+          <img
+            [alt]="customer.user.name"
+            src="{{customer.user.image}}"
+            width="32"
+            height="32"
+            style="vertical-align: middle" />
+          <span class="font-bold ml-2">{{customer.user.name}}</span>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="groupfooter" let-customer>
+      <tr class="p-rowgroup-footer" >
+        <td colspan="4" style="text-align: right">Total Models</td>
+        <td>{{calculateCustomerTotal(customer.user.name)}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-product>
+      <tr [pSelectableRow]="product">
+        <td>{{product.name}}</td>
+        <td><img [src]="product.image" [alt]="product.name" width="100" class="shadow-4" /></td>
+        <td>{{product.category}}</td>
+        <td>{{product.price | currency:'USD'}}</td>
+        <td><p-rating [(ngModel)]="product.reviews" [readonly]="true" [cancel]="false" /></td>
+
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

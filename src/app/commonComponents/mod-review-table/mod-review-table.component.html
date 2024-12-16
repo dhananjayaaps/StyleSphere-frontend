@@ -1,0 +1,39 @@
+<div class="card">
+  <p-table
+    [value]="models"
+    dataKey="id"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [paginator]="true"
+    [globalFilterFields]="['name','category','price', 'reviews']"
+
+    [tableStyle]="{'min-width': '60rem'}">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="bg-lightpurple/15" pSortableColumn="name" style="width:20%">
+          Name <p-sortIcon field="title" /></th>
+
+        <!--        <th>Model</th>-->
+        <!--        <th>Category</th>-->
+        <!--        <th>Price</th>-->
+        <!--        <th>Reviews</th>-->
+        <th class= "bg-lightpurple/15" style="width:20%">Model Image </th>
+        <th class= "bg-lightpurple/15" pSortableColumn="category" style="width:20%">Format<p-sortIcon field="category" /></th>
+        <th class= "bg-lightpurple/15" pSortableColumn="price" style="width:20%">Created Date <p-sortIcon field="price" /></th>
+        <th class= "bg-lightpurple/15" pSortableColumn="reviews" style="width:20%">Review </th>
+
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{product.title}}</td>
+        <td><img [src]="product.image1Url" [alt]="product.title" width="100" class="shadow-4" /></td>
+        <td>{{product.format}}</td>
+        <td>{{product.createdAt | date: 'medium' }}</td>
+        <td><button class="bg-purple4 text-metawhite rounded-md hover:bg-purple2" (click)="reviewNow(product)">Review Now</button></td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+</div>

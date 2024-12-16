@@ -1,0 +1,60 @@
+<div class="flex flex-col h-screen  fixed  w-80 ">
+  <div class="w-full flex items-center justify-around mt-7">
+    <img src="./assets/images/navlogo.png" class="size-24">
+  </div>
+
+  <div class="mt-8 flex justify-center">
+    <ul class="w-3/4">
+      <li >
+        <a routerLink="/sysadmin_dashboard" class="flex items-center p-4 text-gray-700 hover:text-pink1 ">
+          <i class="pi pi-th-large mr-3"></i> Dashboard
+        </a>
+      </li>
+      <li class="hover:bg-gray-200">
+        <div (click)="toggleFinance()" class=" hover:text-pink1 flex items-center p-4 text-gray-700 cursor-pointer justify-between">
+          <div class="flex items-center ">
+            <i class="pi pi-users mr-3 "></i> Users
+          </div>
+          <i class="pi" [ngClass]="{'pi-chevron-down': !isFinanceOpen, 'pi-chevron-up': isFinanceOpen}"></i>
+        </div>
+        <ul *ngIf="isFinanceOpen" class="ml-8">
+          <li class="hover:bg-gray-200 hover:text-pink1">
+            <a routerLink="/sysadmin_modarator" class="flex items-center p-2 text-gray-700">
+              <i class="pi pi-wrench mr-2"></i> Moderators
+            </a>
+          </li>
+          <li class="hover:bg-gray-200 hover:text-pink1">
+            <a routerLink="/sysadmin_creator" class="flex items-center p-2 text-gray-700">
+              <i class="pi pi-user-edit mr-2"></i> Creators
+            </a>
+          </li>
+          <li class="hover:bg-gray-200 hover:text-pink1 ">
+            <a routerLink="/sysadmin_users" class="flex items-center p-2 text-gray-700">
+              <i class="pi pi-user mr-2"></i> Users
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="hover:bg-gray-200 hover:text-pink1">
+        <a routerLink="/sysadmin_system_admin" class="flex items-center p-4 text-gray-700">
+          <i class="pi pi-user mr-3"></i> System Admins
+        </a>
+      </li>
+      <li class="hover:bg-gray-200 hover:text-pink1">
+        <a routerLink="/sysadmin_modals" class="flex items-center p-4 text-gray-700">
+          <i class="pi pi-box mr-3"></i> Models
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="absolute bottom-0 flex justify-center w-full mb-6 ">
+    <button class="w-3/4 !p-2 rounded-md bg-purple4 text-metawhite font-semibold hover:bg-red500/80 transition-opacity ">Sign Out</button>
+  </div>
+</div>
+
+
+
+
+
+
+

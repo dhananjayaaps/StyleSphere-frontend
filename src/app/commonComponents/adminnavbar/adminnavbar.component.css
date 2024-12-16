@@ -1,0 +1,17 @@
+:host ::ng-deep .p-menu{
+  background: #c2a0d7 !important;
+  padding-top: 0px !important;
+}
+
+:host ::ng-deep .p-menu .p-submenu-header{
+  color: #000 !important;
+  background: #a31f0d !important;
+  visibility: hidden;
+}
+
+:host ::ng-deep .p-menu .p-menuitem-link:hover{
+  color: #000 !important;
+  background: #cb72d0 !important;
+}
+
+

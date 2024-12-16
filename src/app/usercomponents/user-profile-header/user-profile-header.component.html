@@ -1,0 +1,18 @@
+<div class="relative h-70 md:h-36 bg-background">
+  <img src="assets/images/bg.png" alt="background"  class="z-10 absolute  w-full h-full object-cover bg-repeat opacity-85" />
+
+
+  <div class="flex h-full items-center absolute px-0 z-20 gap-3 pl-10" *ngIf="user">
+
+    <img src="{{imageUrl}}" alt="Profile Picture" class=" rounded-full w-20 h-20">
+    <h1 class="text-2xl md:text-4xl text-metawhite font-light ">{{username}}</h1>
+
+  </div>
+  <div class="flex h-full items-center absolute px-0 z-20 gap-3 pl-10" *ngIf="!user">
+
+    <h1 class="text-2xl md:text-4xl text-metawhite font-light ">My Files</h1>
+
+  </div>
+
+
+</div>

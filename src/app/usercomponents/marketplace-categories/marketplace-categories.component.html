@@ -1,0 +1,41 @@
+<!-- nav - bar -->
+<app-user-navbar></app-user-navbar>
+
+<!-- main -->
+<div class="bg-background pb-6 mt-16">
+
+
+  <div class="relative h-36  bg-background   flex items-center justify-center text-center">
+    <img src="assets/images/flow.jpg" alt="background" class="absolute  w-full h-36 object-cover bg-repeat opacity-30" />
+    <div class="relative z-10">
+      <h3 class="text-metawhite text-3xl font-light text-center">Personalize your experience.What are you interested in?</h3>
+    </div>
+  </div>
+
+  <div class="flex justify-center mt-10">
+          <div class="grid gap-4 mb-10 text-metawhite sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            <div *ngFor="let collection of paginatedCollections"
+              class="relative w-60 h-40 bg-metablack border border-darkpink  p-4 rounded-lg overflow-hidden hover:scale-105">
+              <div>
+                <img src="{{collection.image}}" alt="background"
+                  class="absolute inset-0 w-full h-full object-cover opacity-50">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
+                  <!-- <i class="pi {{collection.icon}}" style="font-size: 1.5rem"></i> -->
+                  <h1 class="text-2xl ">{{collection.name}}</h1>
+                  <!-- <p class="mt-2 text-sm">{{collection.modelcount}} models</p> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card flex justify-center">
+          <p-paginator (onPageChange)="onCollectionPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalCollectionRecords"
+            [rowsPerPageOptions]="[15,25,20,30]"></p-paginator>
+        </div>
+
+
+
+</div>
+<!--   footer   -->
+<app-footer></app-footer>

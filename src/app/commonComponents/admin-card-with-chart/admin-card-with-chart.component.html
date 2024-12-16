@@ -1,0 +1,10 @@
+<div class="card bg-metawhite p-8 {{css}}  rounded-lg shadow-md hover:bg-darkpurple group">
+  <div class="h-[150px] w-fit flex justify-center flex-col">
+    <h2 class="text-lg group-hover:text-metawhite font-semibold text-metablack">{{title}}</h2>
+    <p class="text-4xl group-hover:text-metawhite lg:text-4xl font-bold text-purple1">{{value}}</p>
+    <p class="mt-1 text-xl  text-{{color}} font-bold">{{precentage}} <i [ngClass]="arrow"></i> </p>
+  </div>
+
+  <p-chart  type="line" [data]="totalmodeldata" [options]="options" height="150px"  [ngClass]="hiddenState"  />
+
+</div>

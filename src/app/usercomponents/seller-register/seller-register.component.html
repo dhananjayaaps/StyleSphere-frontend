@@ -1,0 +1,158 @@
+<!-- nav - bar -->
+<app-user-navbar></app-user-navbar>
+
+
+<!-- main -->
+<div class="bg-background pb-6 mt-16">
+  <div class="flex justify-center">
+
+    <div class="w-2/3">
+      <div class="w-full mx-auto p-4">
+
+        <div class="max-w-4xl mx-auto p-4 rounded border border-pink1 focus:border-pink1">
+          <form [formGroup]="sellerDetails" (ngSubmit)="ceratorRegister()" class="p-6">
+            <h2 class="text-3xl text-center text-darkgray  mb-4">Create Your Creator Profile</h2>
+
+            <h3 class="text-xl  text-start font-bold text-pink3  mt-12 mb-4">Personal Details</h3>
+
+            <div class="">
+              <div class="mb-4 justify-center">
+                <div class=" flex justify-center">
+                  <h2 class="mt-2   text-metawhite font-bold py-2 "> Upload  Profile Picture</h2>
+                </div>
+                <div class="flex justify-center">
+                  <input class=" rounded w-2/3 bg-pink3 hover:bg-pink1" 
+                    id="imageFile"
+                    type="file"
+                    multiple
+                    (change)="onFileSelect($event, 'images')"
+                    required
+                  >
+                </div>
+                <h6 class="block text-center text-metawhite mb-2" for="profile-picture">JPG or PNG and 10MB Max</h6>
+              </div>
+            </div>
+
+            <!-- display name -->
+            <div class="mb-4">
+              <label class="block text-metawhite mb-2" for="displayName">Display Name</label>
+              <input class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
+                type="text" id="displayName" formControlName="displayName" />
+                <small *ngIf="sellerDetails.get('displayName')?.touched && sellerDetails.get('displayName')?.invalid" class="text-red">
+                  Display name is required and must be at least 3 characters long.
+                </small>
+            </div>
+
+            <!--bio-->
+            <div class="mb-4">
+              <label class="block text-metawhite mb-2" for="biography">Your Biography</label>
+              <textarea class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
+                id="bio" rows="4" formControlName="biography"></textarea>
+                <div *ngIf="sellerDetails.get('biography')?.invalid && sellerDetails.get('biography')?.touched" class="text-red">
+                  Biography is required.
+                </div>
+            </div>
+
+            <!--contact number-->
+            <div class="mb-4">
+              <label class="block text-metawhite mb-2" for="contactNumber">Contact Number</label>
+              <input class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
+                type="text" id="contactNumber" formControlName="contactNumber" />
+                <div *ngIf="sellerDetails.get('contactNumber')?.invalid && sellerDetails.get('contactNumber')?.touched" class="text-red">
+                  Enter a valid 10-digit contact number.
+                </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-metawhite mb-2" for="skills">Skills</label>
+              <input class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
+                type="text" id="skills" formControlName="skills" />
+            </div>
+
+
+
+
+
+            <!--Links-->
+            <h3 class="text-xl font-bold text-start text-pink3  mt-12 mb-4">Links</h3>
+            <div class="mb-4">
+              <label class="block text-metawhite mb-2" for="personalWebsite">Personal Website</label>
+              <input class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
+                type="text" id="personalWebsite" formControlName="personalWebsite" />
+                <div *ngIf="sellerDetails.get('personalWebsite')?.invalid && sellerDetails.get('personalWebsite')?.touched" class="text-red">
+                  Enter a valid URL.
+                </div>
+            </div>
+            <div class="mb-4">
+              <label class="block text-metawhite mb-2" for="twitterUsername">Twitter Username</label>
+              <input class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
+                type="text" id="twitterUsername" formControlName="twitterUsername" />
+
+            </div>
+            <div class="mb-4">
+              <label class="block text-metawhite mb-2" for="facebookUsername ">Facebook Username</label>
+              <input class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
+                type="text" id="facebookUsername" formControlName="facebookUsername" />
+            </div>
+            <div class="mb-4">
+              <label class="block text-metawhite mb-2" for="linkedInUsername">LinkedIn Username</label>
+              <input class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
+                type="text" id="linkedInUsername" formControlName="linkedInUsername" />
+            </div>
+
+
+            <h3 class="text-xl font-bold text-start text-pink3  mt-12 mb-4">Bank Details</h3>
+            <div class="mb-4">
+              <label class="block text-metawhite mb-2" for="bankName">Bank Name</label>
+              <input class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
+                type="text" id="bankName" formControlName="bankName" />
+                <div *ngIf="sellerDetails.get('bankName')?.invalid && sellerDetails.get('bankName')?.touched" class="text-red">
+                  Bank name is required.
+                </div>
+            </div>
+            <div class="mb-4">
+              <label class="block text-metawhite mb-2" for="accountNumber">Account Number</label>
+              <input class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
+                type="text" id="accountNumber" formControlName="accountNumber" />
+                <div *ngIf="sellerDetails.get('accountNumber')?.invalid && sellerDetails.get('accountNumber')?.touched" class="text-red">
+                  Enter a valid account number.
+                </div>
+            </div>
+            <div class="mb-4">
+              <label class="block text-metawhite mb-2" for="branch">Branch</label>
+              <input class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
+                type="text" id="branch" formControlName="branch" />
+                <div *ngIf="sellerDetails.get('branch')?.invalid && sellerDetails.get('branch')?.touched" class="text-red">
+                  Branch is required.
+                </div>
+            </div>
+            <div class="mb-4">
+              <label class="block text-metawhite mb-2" for="accountName">Account Holder Name</label>
+              <input class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
+                type="text" id="accountName" formControlName="accountName" />
+                <div *ngIf="sellerDetails.get('accountName')?.invalid && sellerDetails.get('accountName')?.touched" class="text-red">
+                  Account holder name is required.
+                  </div>
+            </div>
+
+
+
+            <div class="flex justify-center h-8">
+              <button type="submit"
+                class="bg-pink3 hover:bg-darkpurple text-metawhite w-1/3 h-8 text-lg mt-4 rounded-lg font-bold py-2 px-10">
+                Save Profile
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- footer -->
+<app-footer></app-footer>

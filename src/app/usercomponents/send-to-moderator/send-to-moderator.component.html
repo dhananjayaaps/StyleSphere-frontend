@@ -1,0 +1,315 @@
+<!-- nav bar -->
+<app-user-navbar></app-user-navbar>
+
+<div class="bg-background mt-16">
+    <!-- Outer Container -->
+    <div class="border border-darkpink mt-[50px] mx-[100px] p-6 rounded-lg shadow-lg w-[1300px] bg-purple1">
+        <!-- Title and Horizontal Line -->
+        <h2 class="text-3xl text-metawhite font-bold mb-4">Send to Moderator</h2>
+        <hr class="border-darkpink mb-6 w-full">
+
+        <!-- Three-column Layout -->
+        <div class="flex flex-row justify-between">
+            <!-- Left Section (Two Parts) -->
+            <div class="w-2/3 pr-6">
+                <p class="mb-4 text-metawhite">
+                    Your model didn't pass our automatic verification process.
+                    <br> You can send it to a moderator for manual review. Please provide the necessary details below.
+                </p>
+                <label class="block text-lg text-metawhite font-medium mb-2">Reason for Review</label>
+                <textarea
+                    class="w-full p-2 border border-darkpink rounded-lg bg-darkpurple text-metawhite placeholder-metawhite placeholder-opacity-50 focus:text-metawhite"
+                    rows="4"
+                    placeholder="Please provide a brief explanation for why you believe this model should be approved."></textarea>
+
+            </div>
+
+            <!-- Right Section (One Part) -->
+            <div class="w-1/3 flex justify-center">
+                <img aria-hidden="true" src="/metanet/src/assets/images/sendto.png" alt="Model illustration"
+                    class="max-w-full rounded-lg shadow-md" />
+            </div>
+        </div>
+
+        <!-- Horizontal Line -->
+        <hr class="border-darkpink my-6 w-full">
+
+        <!-- Left Content and Image Statistics -->
+        <div class="flex flex-row justify-between">
+            <!-- Left Content -->
+            <div class="w-2/3 pr-6">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2 text-metawhite">Title</label>
+                    <input type="text" placeholder="Enter your model title"
+                        class="border border-darkpink rounded-lg bg-darkpurple text-metawhite placeholder-metawhite placeholder-opacity-50 focus:text-metawhite border-border rounded-lg p-2 w-full">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2 text-metawhite">Description</label>
+                    <textarea placeholder="Add a detailed description of your model!"
+                        class="border border-darkpink rounded-lg bg-darkpurple text-metawhite placeholder-metawhite placeholder-opacity-50 focus:text-metawhite border-border rounded-lg p-2 w-full h-24"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2 text-metawhite">Categories</label>
+                    <select
+                        class="border border-darkpink rounded-lg bg-darkpurple text-metawhite focus:text-metawhite border-border rounded-lg p-2 w-full">
+                        <option class="placeholder-metawhite placeholder-opacity-50">Select Your Model Category</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2 text-metawhite">Tags</label>
+                    <input type="text" placeholder="Enter tags for the model!"
+                        class="border border-darkpink rounded-lg bg-darkpurple text-metawhite placeholder-metawhite placeholder-opacity-50 focus:text-metawhite border-border rounded-lg p-2 w-full">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2 text-metawhite">Download</label>
+                    <div class="flex space-x-20">
+                        <button
+                            class="bg-background w-full h-8 border border-darkpink text-metawhite hover:bg-darkpink rounded-lg p-2">No</button>
+                        <button
+                            class="bg-background w-full h-8 border border-darkpink text-metawhite hover:bg-darkpink rounded-lg p-2">Free</button>
+                        <button id="paidButton"
+                            class="bg-background w-full h-8 border border-darkpink text-metawhite hover:bg-darkpink rounded-lg p-2">Paid</button>
+                    </div>
+                    <div id="amountField" class="mt-2 hidden">
+                        <input type="text" placeholder="Enter amount"
+                            class="w-full p-2 border border-pink-500 rounded-lg bg-darkpurple text-metawhite placeholder-gray-400">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Content (Model Image with Statistics) -->
+            <div class="w-1/3">
+                <div class="bg-card rounded-lg p-4 text-center">
+                    <img src="/metanet/src/assets/images/avata.jpg" alt="Model Preview"
+                        class="max-w-full rounded-lg mb-4" />
+                    <button
+                        class="bg-background w-full h-8 border border-darkpink text-metawhite hover:bg-darkpink rounded-lg p-2">
+                        Re Upload
+                    </button>
+                    <ul class="mt-2 text-metawhite">
+                        <li class="flex items-center">
+                            <span class="text-green-500">✔️</span> Upload
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500">✔️</span> Processed
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500">✔️</span> Ready to Publish
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Horizontal Line -->
+        <hr class="border-darkpink my-6 w-full">
+
+        <!-- Buttons -->
+        <div class="flex justify-end space-x-4">
+            <button
+                class="bg-darkpink w-[100px] h-8 border border-darkpink text-metawhite hover:bg-darkpurple rounded-lg px-4 py-2">Cancel</button>
+            <button id="sendButton"
+                class="bg-darkpink w-[250px] h-8 border border-darkpink text-metawhite hover:bg-darkpurple rounded-lg px-4 py-2">
+                Send to Moderator
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Popup -->
+<div id="successPopup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
+    <div class="bg-card rounded-lg shadow-lg p-6 text-center">
+        <div class="bg-primary rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <img aria-hidden="true" alt="checkmark" src="https://openui.fly.dev/openui/24x24.svg?text=✔️" />
+        </div>
+        <h2 class="text-primary-foreground text-lg font-semibold mb-2">Your Model has Successfully sent to Moderator
+        </h2>
+        <a href="#" class="bg-secondary text-secondary-foreground hover:bg-secondary/80 py-2 px-4 rounded-lg"
+            id="closePopupButton">Back to Home</a>
+    </div>
+</div>
+
+
+
+    <!-- Navbar -->
+    <!-- <nav class="bg-purple-700 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-lg font-bold">Admin Dashboard</h1>
+            <ul class="flex space-x-4">
+                <li><a href="#" class="hover:underline">Home</a></li>
+                <li><a href="#" class="hover:underline">Profile</a></li>
+                <li><a href="#" class="hover:underline">Settings</a></li>
+                <li><a href="#" class="hover:underline">Logout</a></li>
+            </ul>
+        </div>
+    </nav> -->
+
+    <!-- Main Container -->
+    <!-- <div class="container mx-auto my-6">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6"> -->
+            <!-- Sidebar -->
+            <!-- <aside class="bg-white p-4 shadow-lg rounded-lg">
+                <h2 class="text-xl font-semibold mb-4">Navigation</h2>
+                <ul class="space-y-3">
+                    <li><a href="#" class="block text-gray-700 hover:bg-purple-200 p-2 rounded">Dashboard</a></li>
+                    <li><a href="#" class="block text-gray-700 hover:bg-purple-200 p-2 rounded">Users</a></li>
+                    <li><a href="#" class="block text-gray-700 hover:bg-purple-200 p-2 rounded">Reports</a></li>
+                    <li><a href="#" class="block text-gray-700 hover:bg-purple-200 p-2 rounded">Analytics</a></li>
+                    <li><a href="#" class="block text-gray-700 hover:bg-purple-200 p-2 rounded">Settings</a></li>
+                    <li><a href="#" class="block text-gray-700 hover:bg-purple-200 p-2 rounded">Notifications</a></li>
+                    <li><a href="#" class="block text-gray-700 hover:bg-purple-200 p-2 rounded">Feedback</a></li>
+                </ul>
+            </aside> -->
+
+            <!-- Main Content -->
+            <!-- <main class="lg:col-span-3 bg-white p-6 shadow-lg rounded-lg"> -->
+                <!-- Welcome Message -->
+                <!-- <section>
+                    <h2 class="text-2xl font-bold mb-4">Welcome Back, Admin!</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"> -->
+                        <!-- Metrics Cards -->
+                        <!-- <div class="bg-purple-100 p-4 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold text-purple-800">Active Users</h3>
+                            <p class="text-2xl font-bold">1,452</p>
+                            <p class="text-sm text-gray-600">Updated 5 mins ago</p>
+                        </div>
+                        <div class="bg-blue-100 p-4 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold text-blue-800">Total Sales</h3>
+                            <p class="text-2xl font-bold">$24,672</p>
+                            <p class="text-sm text-gray-600">This Month</p>
+                        </div>
+                        <div class="bg-green-100 p-4 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold text-green-800">Revenue</h3>
+                            <p class="text-2xl font-bold">$7,453</p>
+                            <p class="text-sm text-gray-600">Net Revenue</p>
+                        </div>
+                    </div>
+                </section> -->
+
+                <!-- Analytics Section -->
+                <!-- <section class="mt-8">
+                    <h3 class="text-xl font-semibold mb-4">Analytics Overview</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-4 shadow rounded-lg">
+                            <h4 class="font-semibold mb-2">User Growth</h4>
+                            <img src="https://via.placeholder.com/600x200" alt="User Growth Chart" class="w-full">
+                        </div>
+                        <div class="bg-white p-4 shadow rounded-lg">
+                            <h4 class="font-semibold mb-2">Revenue Breakdown</h4>
+                            <img src="https://via.placeholder.com/600x200" alt="Revenue Breakdown Chart" class="w-full">
+                        </div>
+                    </div>
+                </section> -->
+
+                <!-- User Management Section -->
+                <!-- <section class="mt-8">
+                    <h3 class="text-xl font-semibold mb-4">User Management</h3>
+                    <table class="w-full border-collapse border border-gray-300">
+                        <thead class="bg-gray-200">
+                            <tr>
+                                <th class="border border-gray-300 p-2 text-left">User</th>
+                                <th class="border border-gray-300 p-2 text-left">Email</th>
+                                <th class="border border-gray-300 p-2 text-left">Role</th>
+                                <th class="border border-gray-300 p-2 text-left">Status</th>
+                                <th class="border border-gray-300 p-2 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-gray-300 p-2">Jane Doe</td>
+                                <td class="border border-gray-300 p-2">jane.doe@example.com</td>
+                                <td class="border border-gray-300 p-2">Admin</td>
+                                <td class="border border-gray-300 p-2 text-green-500">Active</td>
+                                <td class="border border-gray-300 p-2">
+                                    <button class="bg-blue-500 text-white px-2 py-1 rounded">Edit</button>
+                                    <button class="bg-red-500 text-white px-2 py-1 rounded">Remove</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 p-2">John Smith</td>
+                                <td class="border border-gray-300 p-2">john.smith@example.com</td>
+                                <td class="border border-gray-300 p-2">Editor</td>
+                                <td class="border border-gray-300 p-2 text-blue-500">Pending</td>
+                                <td class="border border-gray-300 p-2">
+                                    <button class="bg-blue-500 text-white px-2 py-1 rounded">Edit</button>
+                                    <button class="bg-red-500 text-white px-2 py-1 rounded">Remove</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section> -->
+
+                <!-- Modals and Notifications -->
+                <!-- <section> -->
+                    <!-- Notification Example -->
+                    <!-- <div class="mt-6 bg-yellow-200 p-4 rounded shadow-lg">
+                        <p class="text-yellow-700">System maintenance scheduled for Sunday at 2:00 AM.</p>
+                    </div> -->
+                    <!-- Modal Trigger -->
+                    <!-- <button id="openModal" class="mt-6 bg-blue-500 text-white px-4 py-2 rounded">Open Modal</button>
+                </section>
+            </main>
+        </div>
+    </div> -->
+
+    <!-- Footer -->
+    <!-- <footer class="bg-purple-700 text-white p-4 mt-6">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Admin Dashboard. All rights reserved.</p>
+        </div>
+    </footer> -->
+
+    <!-- Modal (Hidden by Default) -->
+    <div id="modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h2 class="text-xl font-bold mb-2">Modal Title</h2>
+            <p class="mb-4">This is a modal. You can add more detailed messages here.</p>
+            <button id="closeModal" class="bg-red-500 text-white px-4 py-2 rounded">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Modal Toggle Logic
+        const openModal = document.getElementById('openModal');
+        const closeModal = document.getElementById('closeModal');
+        const modal = document.getElementById('modal');
+
+        openModal.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+    </script>
+
+
+<script>
+    // Get the popup element and buttons
+    const sendButton = document.getElementById('sendButton');
+    const successPopup = document.getElementById('successPopup');
+    const closePopupButton = document.getElementById('closePopupButton');
+
+    // Show the popup when the "Send to Moderator" button is clicked
+    sendButton.addEventListener('click', () => {
+        successPopup.classList.remove('hidden');
+    });
+
+    // Hide the popup when the "Back to Home" button is clicked
+    closePopupButton.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent navigation
+        successPopup.classList.add('hidden');
+    });
+</script>
+
+
+<script>
+    // Show the amount input field when the "Paid" button is clicked
+    document.getElementById("paidButton").addEventListener("click", () => {
+        const amountField = document.getElementById("amountField");
+        amountField.classList.toggle("hidden");
+    });
+</script>
+
+<!-- footer -->
+<app-footer></app-footer>

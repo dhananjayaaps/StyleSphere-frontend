@@ -1,0 +1,298 @@
+<!-- nav - bar -->
+<app-seller-navbar></app-seller-navbar>
+
+<!-- main -->
+<div class="bg-background pb-6 mt-16">
+
+
+  <!-- header -->
+  <app-user-profile-header></app-user-profile-header>
+
+
+  <!-- details - panel -->
+  <div class="bg-purple1  mt-3  p-6 rounded-lg shadow-lg">
+
+    <p-tabView selectOnFocus="true" orientation="">
+
+      <!--Profile-->
+      <p-tabPanel header="Profile">
+        <div class="flex justify-center">
+
+          <div class="w-2/3" *ngIf="data">
+            <div class="max-w-4xl mx-auto p-4 rounded border border-pink1 focus:border-pink1">
+              <div class="p-6">
+
+                <h2 class="text-3xl text-center text-darkgray mb-4">Personal Profile</h2>
+                <div class="mb-4 w-full flex justify-center items-center">
+
+                  <img class="w-24 h-24 rounded-full border border-pink1" src="{{ data.profilePicture }}" alt="Profile Picture" />
+                </div>
+                <h3 class="text-xl text-start font-bold text-pink3 mt-12 mb-4">Personal Details</h3>
+
+                <div class="mb-4">
+                  <label class="block text-metawhite mb-2">Username</label>
+                  <p class="w-full p-2 bg-purple1 rounded border border-pink1 text-darkgray">
+                    {{ data.displayName }}
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <label class="block text-metawhite mb-2">Biography</label>
+                  <p class="w-full p-2 bg-purple1 rounded border border-pink1 text-darkgray">
+                    {{ data.biography }}
+                  </p>
+                </div>
+
+
+
+                <h3 class="text-xl font-bold text-start text-pink3 mt-12 mb-4">Links</h3>
+
+                <div class="mb-4">
+                  <label class="block text-metawhite mb-2">Personal Website</label>
+                  <p class="w-full p-2 bg-purple1 rounded border border-pink1 text-darkgray">
+                    {{ data.personalWebsite }}
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <label class="block text-metawhite mb-2">Twitter</label>
+                  <p class="w-full p-2 bg-purple1 rounded border border-pink1 text-darkgray">
+                    {{ data.twitterUsername }}
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <label class="block text-metawhite mb-2">Facebook</label>
+                  <p class="w-full p-2 bg-purple1 rounded border border-pink1 text-darkgray">
+                    {{ data.facebookUsername }}
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <label class="block text-metawhite mb-2">LinkedIn</label>
+                  <p class="w-full p-2 bg-purple1 rounded border border-pink1 text-darkgray">
+                    {{ data.linkedInUsername }}
+                  </p>
+                </div>
+
+                <h3 class="text-xl font-bold text-start text-pink3 mt-12 mb-4">Bank Details</h3>
+
+                <div class="mb-4">
+                  <label class="block text-metawhite mb-2">Bank Name</label>
+                  <p class="w-full p-2 bg-purple1 rounded border border-pink1 text-darkgray">
+                    {{ data.bankName }}
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <label class="block text-metawhite mb-2">Account Number</label>
+                  <p class="w-full p-2 bg-purple1 rounded border border-pink1 text-darkgray">
+                    {{ data.accountNumber }}
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <label class="block text-metawhite mb-2">Branch</label>
+                  <p class="w-full p-2 bg-purple1 rounded border border-pink1 text-darkgray">
+                    {{ data.branch }}
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <label class="block text-metawhite mb-2">Account Balance</label>
+                  <p class="w-full p-2 bg-purple1 rounded border border-pink1 text-darkgray">
+                    {{ data.accountBalance}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </div>
+
+
+      </p-tabPanel>
+
+
+
+      <!--Password - and - API-->
+      <!--Change Password-->
+      <p-tabPanel header="Change Password">
+        <div class="flex justify-center">
+          <div class="w-2/3">
+            <div class="w-full mx-auto p-4">
+              <div class="max-w-4xl mx-auto p-4 rounded border border-pink1 focus:border-pink1">
+                <form [formGroup]="changePassword" class="p-6" (ngSubmit)="resetPassword()">
+                  <h2 class="text-2xl text-center text-darkgray mb-4">Change Your Password</h2>
+
+                  <div class="mb-4">
+                    <label class="block text-metawhite mb-2" for="current-password">Current Password</label>
+                    <input
+                      class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
+                      type="password" id="current-password" formControlName="currentPassword" />
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="block text-metawhite mb-2" for="new-password">New Password</label>
+                    <input
+                      class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
+                      type="password" id="new-password" formControlName="newPassword" />
+                    <p class="text-xs text-end text-metawhite mb-2">* Must be at least 10 characters long</p>
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="block text-metawhite mb-2" for="confirm-password">Confirm New Password</label>
+                    <input
+                      class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
+                      type="password" id="confirm-password" formControlName="confirmPassword" />
+                  </div>
+
+                  <div class="flex justify-center h-8">
+                    <button
+                      type="submit"
+                      class="bg-pink3 hover:bg-darkpurple text-metawhite w-1/3 text-lg h-8 mt-4 rounded-lg font-bold py-2 px-10">
+                      Change Password
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <!--Notifications-->
+<!--      <p-tabPanel header="Notifications">-->
+<!--        <div class="flex justify-center">-->
+<!--          <div class="w-2/3">-->
+<!--            <div class="w-full mx-auto p-4">-->
+<!--              <div class="max-w-4xl mx-auto p-4 rounded border border-pink1 focus:border-pink1">-->
+<!--                <form class=" p-6">-->
+<!--                  <h2 class="text-2xl text-center  text-darkgray  mb-4"> Email notification preferences </h2>-->
+<!--                  <p class="text-pink3 text-m mb-4">Select/Unselect all notification options</p>-->
+
+
+<!--                  <label class="flex items-center mb-4">-->
+<!--                    <input type="checkbox" class="form-checkbox text-primary" />-->
+<!--                    <span class=" text-metawhite ml-2">Yes, email me about Sketchfab products, news, events, and promotions.</span>-->
+<!--                  </label>-->
+
+<!--                  <div class="mb-6">-->
+<!--                    <h3 class="text-xl font-bold text-start text-pink3  mt-12 mb-4">General</h3>-->
+<!--                    <label class="block text-metawhite mb-2">-->
+<!--                      <input type="checkbox" class="form-checkbox text-primary dark:text-primary"  />-->
+<!--                      <span class="ml-2">Product suggestions</span>-->
+<!--                    </label>-->
+<!--                    <label class="block text-metawhite mb-2">-->
+<!--                      <input type="checkbox" class="form-checkbox text-primary dark:text-primary" />-->
+<!--                      <span class="ml-2">New feature notifications</span>-->
+<!--                    </label>-->
+<!--                    <label class="block text-metawhite mb-2">-->
+<!--                      <input type="checkbox" class="form-checkbox text-primary dark:text-primary" />-->
+<!--                      <span class="ml-2">Feature education</span>-->
+<!--                    </label>-->
+<!--                  </div>-->
+
+<!--                  <div class="mb-6">-->
+<!--                    <h3 class="text-xl font-bold text-start text-pink3  mt-12 mb-4">Community</h3>-->
+<!--                    <label class="block text-metawhite mb-2">-->
+<!--                      <input type="checkbox" class="form-checkbox text-primary dark:text-primary" />-->
+<!--                      <span class="ml-2">New art challenge notifications</span>-->
+<!--                    </label>-->
+<!--                    <label class="block text-metawhite mb-2">-->
+<!--                      <input type="checkbox" class="form-checkbox text-primary dark:text-primary" />-->
+<!--                      <span class="ml-2">Community newsletter</span>-->
+<!--                    </label>-->
+<!--                    <label class="block text-metawhite mb-2">-->
+<!--                      <input type="checkbox" class="form-checkbox text-primary dark:text-primary" />-->
+<!--                      <span class="ml-2">Cultural Heritage community newsletter</span>-->
+<!--                    </label>-->
+<!--                    <label class="block text-metawhite mb-2">-->
+<!--                      <input type="checkbox" class="form-checkbox text-primary dark:text-primary" />-->
+<!--                      <span class="ml-2">API Developers newsletter</span>-->
+<!--                    </label>-->
+<!--                  </div>-->
+
+
+<!--                  <div class="mb-6">-->
+<!--                    <h3 class="text-xl font-bold text-start text-pink3  mt-12 mb-4">Account Activity</h3>-->
+<!--                    <label class="block text-metawhite mb-2">-->
+<!--                      <input type="checkbox" class="form-checkbox text-primary dark:text-primary" />-->
+<!--                      <span class="ml-2">New follower notifications</span>-->
+<!--                    </label>-->
+<!--                    <label class="block text-metawhite mb-2">-->
+<!--                      <input type="checkbox" class="form-checkbox text-primary dark:text-primary" />-->
+<!--                      <span class="ml-2">Collection update notifications</span>-->
+<!--                    </label>-->
+<!--                  </div>-->
+
+<!--                  <div class="mb-6">-->
+<!--                    <h3 class="text-xl font-bold text-start text-pink3  mt-12 mb-4">Model Activity</h3>-->
+<!--                    <label class="block text-metawhite mb-2">-->
+<!--                      <input type="checkbox" class="form-checkbox text-primary dark:text-primary" />-->
+<!--                      <span class="ml-2">Model upload has finished processing</span>-->
+<!--                    </label>-->
+<!--                    <label class="block text-metawhite mb-2">-->
+<!--                      <input type="checkbox" class="form-checkbox text-primary dark:text-primary" />-->
+<!--                      <span class="ml-2">Someone likes my model</span>-->
+<!--                    </label>-->
+<!--                    <label class="block text-metawhite mb-2">-->
+<!--                      <input type="checkbox" class="form-checkbox text-primary dark:text-primary" />-->
+<!--                      <span class="ml-2">New model upload by someone I’m following</span>-->
+<!--                    </label>-->
+<!--                  </div>-->
+
+<!--                  <div class="mb-6">-->
+<!--                    <h3 class="text-xl font-bold text-start text-pink3  mt-12 mb-4">Comment Activity</h3>-->
+<!--                    <label class="block text-metawhite mb-2">-->
+<!--                      <input type="checkbox" class="form-checkbox text-primary dark:text-primary" />-->
+<!--                      <span class="ml-2">New mention or comment on my model</span>-->
+<!--                    </label>-->
+<!--                    <label class="block text-metawhite mb-2">-->
+<!--                      <input type="checkbox" class="form-checkbox text-primary dark:text-primary" />-->
+<!--                      <span class="ml-2">New comment in comment thread</span>-->
+<!--                    </label>-->
+<!--                  </div>-->
+
+<!--                  <div class="mb-6">-->
+<!--                    <h3 class="text-xl font-bold text-start text-pink3  mt-12 mb-4">MetaNet Store</h3>-->
+<!--                    <label class="block text-metawhite mb-2">-->
+<!--                      <input type="checkbox" class="form-checkbox text-primary dark:text-primary" />-->
+<!--                      <span class="ml-2">MetaNet Store updates for buyers</span>-->
+<!--                    </label>-->
+<!--                   <p class="text-darkgray mb-4">Please note: we will still send you very important emails (e.g., password reset emails and notifications about changes to our Terms of Use).</p>-->
+<!--                   </div>-->
+
+<!--                  <div class="flex justify-center h-8">-->
+<!--                    <button-->
+<!--                      class="bg-pink3 hover:bg-darkpurple text-metawhite w-1/3 text-lg h-8 mt-4 rounded-lg font-bold py-2 px-10">-->
+<!--                      Save Notification Settings-->
+<!--                    </button>-->
+<!--                  </div>-->
+
+<!--                </form>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--      </p-tabPanel>-->
+
+<!--      &lt;!&ndash;Account&ndash;&gt;-->
+
+<!--      <p-tabPanel header="Account">-->
+
+<!--      </p-tabPanel>-->
+
+
+    </p-tabView>
+
+  </div>
+
+
+</div>
+<!-- footer -->
+<app-footer></app-footer>

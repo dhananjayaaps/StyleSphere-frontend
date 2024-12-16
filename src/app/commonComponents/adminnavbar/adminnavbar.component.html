@@ -1,0 +1,42 @@
+<!-- top - bar -->
+<div class="flex items-center justify-between mb-6 p-4 py-2 bg-lightpurple/10 text-card-foreground shadow-md rounded-lg">
+  <div class="flex items-center space-x-4">
+    <div class="card flex justify-content-center">
+      <p-breadcrumb
+        class=""
+        [style]="{ 'background-color': 'transparent', 'color': '#fff', 'font-size': '1.1rem'}"
+        [model]="bcitems"
+        [home]="home" />
+    </div>
+  </div>
+  <div class="flex items-center space-x-4">
+    <button class="relative p-2 text-primary flex justify-content-center">
+      <i class="pi pi-bell text-2xl custom-badge" pBadge value="5"></i>
+    </button>
+
+
+    <div class="card flex justify-content-center">
+      <!-- menu -->
+      <p-menu #menu [model]="items" [popup]="true" >
+        <ng-template pTemplate="item" let-item>
+          <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route" class="p-menuitem-link">
+              <span [class]="item.icon"></span>
+              <span class="ml-2">{{ item.label }}</span>
+            </a>
+          </ng-container>
+          <ng-template #elseBlock>
+            <a [href]="item.url" class="p-menuitem-link">
+              <span [class]="item.icon"></span>
+              <span class="ml-2">{{ item.label }}</span>
+            </a>
+          </ng-template>
+        </ng-template>
+      </p-menu>
+
+      <p-button (onClick)="menu.toggle($event)">
+        <img class="w-10 h-10" src="assets/images/avata.jpg" alt="User profile picture" />
+      </p-button>
+    </div>
+  </div>
+</div>

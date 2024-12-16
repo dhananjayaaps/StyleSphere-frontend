@@ -1,0 +1,134 @@
+<div class="card  ">
+
+
+  <p-dialog header="UserDetails" [modal]="true" [(visible)]="visible" [style]="{ width: '20rem'}">
+
+    <div class="flex-col px-5">
+      <p>Name : {{selectedModel?.name}}</p>
+      <p>Email : {{selectedModel?.email}}</p>
+      <p>Contact : {{selectedModel?.contact}}</p>
+    </div>
+    <div class="flex flex-row w-full pt-5 justify-around items-center">
+      <button (click)="cancel()"  class="w-28 bg-lightpink text-metawhite rounded-md py-5 hover:bg-lightpurple">Close</button>
+    </div>
+
+  </p-dialog>
+
+
+
+
+
+
+  <p-table
+    #dt2
+    [value]="customers"
+    selectionMode="single"
+    [rows]="10"
+    (onRowSelect)="onRowSelect($event)"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [loading]="loading"
+    [paginator]="true"
+    [globalFilterFields]="['id','name','email','contact', 'status']"
+    [tableStyle]="{ 'min-width': '1100px' }"
+  >
+
+    <ng-template pTemplate="header">
+
+      <tr >
+
+        <th>
+          <p-columnFilter
+            type="text"
+            field="name"
+            placeholder="Search by name"
+            ariaLabel="Filter Name" />
+        </th>
+        <th>
+          <p-columnFilter
+            type="text"
+            field="email"
+            placeholder="Search by email"
+            ariaLabel="Filter Name" />
+        </th>
+        <th>
+          <p-columnFilter
+            type="text"
+            field="contact"
+            placeholder="Search by contact"
+            ariaLabel="Filter Name" />
+        </th>
+        <th>
+          <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
+            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+              <p-dropdown
+                [options]="statuses"
+                [(ngModel)]="selectedStatus"
+                (onChange)="filter($event.value)"
+                placeholder="Select One"
+                [showClear]="true">
+                <ng-template let-option pTemplate="item">
+                  <p-tag
+                    [value]="option.value"
+                    [severity]="getSeverity(option.label)" />
+                </ng-template>
+              </p-dropdown>
+            </ng-template>
+          </p-columnFilter>
+        </th>
+      </tr>
+
+
+
+
+      <tr class="custom-header-row">
+
+
+        <th class="bg-lightpurple/15" pSortableColumn="name" style="width:25%">
+          Name <p-sortIcon field="name" /></th>
+
+        <th class="bg-lightpurple/15" pSortableColumn="email" style="width:25%">
+          Email <p-sortIcon field="email" />
+        </th>
+
+        <th class="bg-lightpurple/15"  style="width:20%">
+          Contact
+        </th>
+
+        <th class="bg-lightpurple/15"  style="width:15%;padding-left: 60px">Status</th>
+      </tr>
+
+    </ng-template>
+
+
+
+
+    <ng-template pTemplate="body" let-customer>
+      <tr [pSelectableRow]="customer">
+
+        <td  class="flex flex-row gap-2">
+          <img
+            [alt]="customer.name"
+            src="https://i.ibb.co/d2g8hF7/istockphoto-1223671392-612x612.jpg"
+            width="32"
+            style="vertical-align: middle" />
+          <span class="ml-1 vertical-align-middle">
+            {{ customer.name }}
+          </span>
+        </td>
+        <td  >
+          {{ customer.email }}
+        </td>
+        <td>
+          {{ customer.contact}}
+        </td>
+        <td  >
+          <p-tag
+            [style]="{ width: '70%'}"
+            [value]="customer.status"
+            [severity]="getSeverity(customer.status)" />
+        </td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+</div>

@@ -1,0 +1,82 @@
+/* tab view */
+/* :host ::ng-deep .p-tabview{
+  background-color: #6d487b;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px 0;
+} */
+
+:host ::ng-deep .p-tabview-nav {
+  display: flex;
+  justify-content: start;
+  gap: 10px;
+  /* background-color: #2d023c; */
+  border-radius: 20px;
+  /* padding: 10px 0; */
+  margin: 0px 20px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-radius: 0px;
+  border-bottom: 2px solid #8d8d8d;
+}
+
+
+/* not selected */
+:host ::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  color: #ffffff;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: none;
+  /* border: 2px solid #E413C4; */
+}
+
+/* hover */
+:host ::ng-deep .p-tabview .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+  background: #6a097d;
+  color: #FFFFFF;
+  border: 2px solid #6a097d;
+}
+
+/* selected */
+:host ::ng-deep .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background-color: #BF0B83;
+  color: #FFFFFF;
+  border: 2px solid #BF0B83;
+}
+
+:host ::ng-deep .p-tabview .p-tabview-panels {
+  background: none;
+}
+
+
+
+/* paginator */
+:host ::ng-deep .p-paginator {
+  background : #9855b263;
+  color: #cc8ad9;
+  width: 100%;
+}
+
+.withdrawbutton {
+  padding: 10px;
+}
+/* :host ::ng-deep .p-paginator .p-paginator-rpp-options{
+  background : #9855b263;
+  color: #cc8ad9;
+} */
+
+/* :host ::ng-deep .p-paginator .p-paginator-rpp-options .p-paginator-page-options{
+  background : #9855b263;
+  color: #cc8ad9;
+} */
+
+.upload-button {
+  background-color: #6a097d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin: 10px 0;
+}

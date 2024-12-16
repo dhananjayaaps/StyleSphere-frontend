@@ -1,0 +1,343 @@
+<nav class="fixed top-0 left-0 right-0 p-4 py-2 flex justify-between items-center bg-background z-50">
+  <div class="flex items-center space-x-4">
+    <a class="text-metawhite font-bold" href="#">
+      <img class="h-12" src="./assets/images/navlogo.png" alt="logo"> <!-- Logo here -->
+    </a>
+  </div>
+  <div class="lg:hidden">
+    <button id="navbar-burger" class="navbar-burger flex items-center text-metawhite bg-lightpink p-1">
+      <svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+      </svg>
+    </button>
+  </div>
+
+  <ul class="hidden absolute top-1/2 left-1/4 transform -translate-y-1/2 -translate-x-1/2  lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-16">
+    <li><a routerLink="/home"  class="text-sm text-metawhite hover:text-lightpink" >Home</a></li>
+    <!-- <li class="text-metawhite">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+      </svg>
+    </li> -->
+    <li><a routerLink="/aboutus" class="text-sm text-metawhite hover:text-lightpink">About Us</a></li>
+    <!-- <li class="text-metawhite">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+      </svg>
+    </li> -->
+    <li><a routerLink="/services" class="text-sm text-metawhite hover:text-lightpink">Services</a></li>
+    <!-- <li class="text-metawhite">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+      </svg>
+    </li> -->
+    <li><a routerLink="/contactus" class="text-sm text-metawhite hover:text-lightpink">Contact Us</a></li>
+  </ul>
+  <button (click)="showLogin()" class="hidden lg:inline-block lg:ml-auto lg:mr-3 h-8 w-32 bg-metawhite hover:bg-darkpurple hover:text-metawhite text-sm text-metablack font-bold rounded-xl transition duration-200" >Sign In</button>
+  <button (click)="showRegister()"  class="hidden lg:inline-block h-8 w-32  bg-lightpurple hover:bg-darkpurple text-sm text-metawhite font-bold rounded-xl transition duration-200">Sign up</button>
+</nav>
+
+<!-- mobile - view -->
+<div id="navbar-menu" class="navbar-menu relative z-50 hidden">
+  <div class="navbar-backdrop fixed inset-0 bg-metablack opacity-25"></div>
+  <nav class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-background border-r overflow-y-auto">
+    <div class="flex items-center mb-8 justify-center" >
+      <a class="mr-auto text-3xl font-bold leading-none" href="#">
+        <img class="h-14" src="./assets/images/logo1.png" alt="logo"> <!-- Logo here -->
+      </a>
+      <button id="navbar-close" class="navbar-close">
+        <svg class="h-6 w-6 text-metawhite cursor-pointer hover:text-lightpink" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="flex justify-center items-center text-center">
+      <ul>
+        <li class="mb-1">
+          <a routerLink="/home" class="block p-4 text-sm font-semibold text-metawhite  hover:text-lightpink rounded">Home</a>
+        </li>
+        <li class="mb-1">
+          <a routerLink="/aboutus" class="block p-4 text-sm font-semibold text-metawhite  hover:text-lightpink rounded">About Us</a>
+        </li>
+        <li class="mb-1">
+          <a routerLink="/services" class="block p-4 text-sm font-semibold text-metawhite  hover:text-lightpink rounded">Services</a>
+        </li>
+        <li class="mb-1">
+          <a routerLink="/contactus" class="block p-4 text-sm font-semibold text-metawhite  hover:text-lightpink rounded">Contact Us</a>
+        </li>
+      </ul>
+    </div>
+    <div class="mt-auto">
+      <div class="pt-6">
+        <button (click)="showLogin()" class="block h-8 w-full mb-3 leading-loose text-xs text-center font-semibold bg-metawhite hover:text-metawhite hover:bg-darkpurple rounded-xl" >Sign in</button>
+        <button (click)="showRegister()" class="block p-4 h-8 w-full leading-loose text-xs text-center text-metawhite font-semibold bg-lightpurple hover:bg-darkpurple rounded-xl" href="#">Sign Up</button>
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+
+<!-- Login Popup -->
+
+<div class="flex justify-center">
+  <p-dialog
+    header=""
+    [(visible)]="visibleLogin"
+    [modal]="true"
+    [draggable]="false"
+    [resizable]="false"
+    styleClass="custom-dialog">
+
+    <div class="flex flex-col md:flex-row max-w-4xl w-full bg-bgpurple text-metawhite shadow-lg rounded-lg overflow-hidden">
+      <div class="w-full md:w-1/2 bg-gradient-to-b from-black to-zinc-900 p-8">
+        <div class="flex flex-col items-center">
+          <lib-toastify-toast-container
+            [hideProgressBar]="true "
+            [newestOnTop]="true"
+            [pauseOnHover]="true"
+          ></lib-toastify-toast-container>
+          <img src="./assets/images/logo1.png" alt="MetaNet Logo" class="mb-6 w-20" />
+          <h2 class="text-3xl font-bold mb-6">LOGIN</h2>
+          <!-- login - form -->
+          <form class="w-full" [formGroup]="loginForm" (ngSubmit)="login()" >
+            <div class="mb-4">
+              <input type="email" id="email" formControlName="email" placeholder="Email" class=" p-3 w-full h-10   bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar" />
+              <div *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched || loginForm.controls['email'].dirty " class="error-msg">
+                <div *ngIf="loginForm.controls['email'].errors?.['email']" class="text-red text-sm pt-1">Invalid email.</div>
+                <div *ngIf="loginForm.controls['email'].errors?.['required']" class="text-red text-sm pt-1">Email is required.</div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <input type="password" id="password" formControlName="password" placeholder="Password"  class=" p-3 w-full h-10   bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"/>
+              <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched || loginForm.controls['password'].dirty" class="error-msg">
+                <div *ngIf="loginForm.controls['password'].errors?.['required']" class="text-red text-sm pt-1">Password is required.</div>
+              </div>
+            </div>
+            <div class="flex items-center font-light justify-between mb-6">
+              <a (click)="showForgotPassword()" class="text-sm text-pink-500 hover:underline">Forgot Password?</a>
+              <label class="inline-flex items-center">
+                <input type="checkbox" class="form-checkbox text-metawhite" />
+                <span class="ml-2 text-sm">Remember Me</span>
+              </label>
+            </div>
+            <button type="submit" [disabled]="loginForm.invalid"  class="w-full h-10 bg-darkpurple hover:bg-lightpurple text-white font-bold py-2 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500">Login Now</button>
+          </form>
+
+          <div class="mt-6 mb-3 text-center">
+            <span class="text-sm text-lightpurple">Login with Others</span>
+          </div>
+          <div class="flex justify-center space-x-4">
+            <a href="#" class="flex items-center border  border-lightpink justify-center  text-black font-bold w-40 py-2 p-4 rounded-lg">
+              <i class="pi pi-google mr-3" style="font-size: 1.5rem"></i>
+              Google
+            </a>
+            <a href="#" class="flex items-center border  border-lightpink justify-center  text-black font-bold w-40 py-2 p-4 rounded-lg">
+              <i class="pi pi-facebook mr-3" style="font-size: 1.5rem"></i>
+              Facebook
+            </a>
+          </div>
+          <div class="mt-6 text-center">
+            <span class="text-sm">New to MetaNet? <a (click)="showRegister()" class="text-darkpink hover:underline">Create Your Account</a></span>
+          </div>
+        </div>
+      </div>
+
+      <div class=" hidden md:block md:w-1/2">
+        <img src="./assets/images/img18.png" alt="VR Experience" class="object-cover w-full h-full" />
+      </div>
+    </div>
+</p-dialog>
+
+</div>
+
+
+
+
+<!-- Register - Popup -->
+<div class="flex justify-center">
+  <p-dialog
+    header=""
+    [(visible)]="visibleRegister"
+    [modal]="true"
+    [draggable]="false"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [resizable]="false"
+    styleClass="custom-dialog">
+
+    <div class="bg-purple1  rounded-lg shadow-lg w-full max-w-4xl max-h-full overflow-x-scroll no-scrollbar">
+      <div class="flex justify-between items-center mb-4 bg-gradient-to-r from-purple2 to-darkpink">
+        <div class="flex items-center">
+          <img src="./assets/images/logo1.png" alt="logo" class="rounded-full mr-2 w-14" />
+          <h2 class="text-metawhite text-xl font-semibold">Register with Us</h2>
+        </div>
+      </div>
+      <lib-toastify-toast-container
+        [hideProgressBar]="true "
+      [newestOnTop]="true"
+      [pauseOnHover]="true"
+      ></lib-toastify-toast-container>
+      <form class="space-y-4 mx-6 text-sm" [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-4">
+
+          <div>
+            <label for="firstName" class="block text-metawhite mb-1">First Name</label>
+            <input type="text" placeholder="" id="firstName" formControlName="firstName" class=" p-3 w-full h-8 md:h-10   bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"/>
+            <div *ngIf="registerForm.controls['firstName'].invalid && registerForm.controls['firstName'].touched || registerForm.controls['firstName'].dirty" class="error-msg">
+              <div *ngIf="registerForm.controls['firstName'].errors?.['required']" class="text-red text-xs pt-1">First name is required.</div>
+            </div>
+          </div>
+          <div>
+            <label for="lastName" class="block text-metawhite mb-1">Last Name</label>
+            <input type="text" placeholder="" id="lastName"  formControlName="lastName" class=" p-3 w-full h-8 md:h-10    bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"/>
+            <div *ngIf="registerForm.controls['lastName'].invalid && registerForm.controls['lastName'].touched || registerForm.controls['lastName'].dirty" class="error-msg">
+              <div *ngIf="registerForm.controls['lastName'].errors?.['required']" class="text-red text-xs pt-1">Last name is required.</div>
+            </div>
+          </div>
+          <div>
+            <label for="userName" class="block  text-metawhite mb-1">Username</label>
+            <input type="text" placeholder="" id="userName" formControlName="userName" class=" p-3 w-full h-8 md:h-10    bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"/>
+            <div *ngIf="registerForm.controls['userName'].invalid && registerForm.controls['userName'].touched || registerForm.controls['userName'].dirty" class="error-msg">
+              <div *ngIf="registerForm.controls['userName'].errors?.['required']" class="text-red text-xs pt-1">User name is required.</div>
+            </div>
+          </div>
+          <div>
+            <label for="email" class="block  text-metawhite mb-1">Email</label>
+            <input type="email" placeholder="" id="email" formControlName="email" class=" p-3 w-full h-8 md:h-10   bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"/>
+            <div *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched || registerForm.controls['email'].dirty" class="error-msg">
+              <div *ngIf="registerForm.controls['email'].errors?.['required']" class="text-red text-xs pt-1">Email is required.</div>
+              <div *ngIf="registerForm.controls['email'].errors?.['email']" class="text-red text-xs pt-1">Invalid email.</div>
+            </div>
+          </div>
+          <div>
+            <label for="password" class="block  text-metawhite mb-1">Password</label>
+            <input type="password" placeholder="" id="password" formControlName="password" class=" p-3 w-full h-8 md:h-10    bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"/>
+            <div *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched || registerForm.controls['password'].dirty" class="error-msg">
+              <div *ngIf="registerForm.controls['password'].errors?.['required']" class="text-red text-xs pt-1">Password is required.</div>
+            </div>
+          </div>
+          <div>
+            <label for="confirmpassword" class="block text-metawhite mb-1">Confirm Password</label>
+            <input type="password" placeholder="" id="confirmpassword" formControlName="confirmPassword" class=" p-3 w-full h-8 md:h-10   bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"/>
+            <div *ngIf="registerForm.controls['confirmPassword'].invalid && registerForm.controls['confirmPassword'].touched || registerForm.controls['confirmPassword'].dirty" class="error-msg">
+              <div *ngIf="registerForm.controls['confirmPassword'].errors?.['required']" class="text-red text-xs pt-1">Confirm password is required.</div>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-2 text-xs">
+          <div class="flex items-center">
+            <p-checkbox
+              [(ngModel)]="checkagree"
+              [ngModelOptions]="{ standalone: true }"
+              [binary]="true"
+              inputId="binary" />
+            <label class=" text-metawhite">I agree to the Terms of Use and Privacy Policy</label>
+          </div>
+
+        </div>
+        <div class="flex items-center">
+          <button type="submit"  class="w-1/2 h-10 mx-auto bg-darkpurple text-metawhite py-2 rounded-lg hover:bg-primary/80">Create Account</button>
+        </div>
+      </form>
+
+      <div class="flex text-metawhite items-center text-xs my-4">
+        <hr class="flex-grow border-muted mx-2" />Or
+        <span class="mx-2 text-darkpink text-sm">Sign Up</span>with
+        <hr class="flex-grow border-muted mx-2" />
+      </div>
+      <div class="flex justify-center text-metawhite text-sm space-x-4">
+        <a href="#" class="flex items-center border  border-lightpink justify-center  text-black font-bold w-40 py-2 p-4 rounded-lg">
+          <i class="pi pi-google mr-3" style="font-size: 1rem"></i>
+          Google
+        </a>
+        <a href="#" class="flex items-center border  border-lightpink justify-center  text-black font-bold w-40 py-2 p-4 rounded-lg">
+          <i class="pi pi-facebook mr-3" style="font-size: 1rem"></i>
+          Facebook
+        </a>
+      </div>
+      <p class="text-metawhite text-xs mt-4 text-center">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
+      <p class="text-metawhite text-sm mt-2 text-center">Already have an account? <a (click)="openLogin()" class="text-darkpink hover:underline">Login to your account</a></p>
+      <div class="relative h-10 mt-3  bg-background  flex items-center justify-center text-center">
+        <img src="assets/images/image07.png" alt="background" class="absolute  w-full h-10 object-cover bg-repeat opacity-45" />
+        <div class="relative z-10 mx-3">
+          <p class="text-sm text-metawhite">"Become a part of Metanet and elevate your AR/VR projects. Discover new possibilities, collaborate with peers, and bring your visions to life."</p>
+        </div>
+      </div>
+    </div>
+</p-dialog>
+</div>
+<!-- Forgot - Password - Popup -->
+<div class="flex justify-center">
+  <p-dialog
+    header=""
+    [(visible)]="visibleForgotPassword"
+    [modal]="true"
+    [draggable]="false"
+    [resizable]="false"
+    styleClass="custom-dialog"
+  >
+    <div class="flex flex-col w-96  bg-bgpurple text-metawhite shadow-lg rounded-lg overflow-hidden">
+      <div class="p-8">
+        <div class="flex flex-col items-center">
+          <h2 class="text-2xl font-bold mb-6">Forgot Password</h2>
+          <!-- forgot - password - form -->
+          <form class="w-full" [formGroup]="forgotPasswordForm" (ngSubmit)="forgotPassword(forgotPasswordForm.value)">
+            <div class="mb-4">
+              <input
+                type="email"
+                id="forgotEmail"
+                formControlName="email"
+                placeholder="Enter your email"
+                class="p-3 w-full h-10 bg-purple1 border border-lightpink rounded-lg text-metawhite placeholder-lightpink focus:outline-none focus:ring-1 focus:ring-darkpink inputbar"
+              />
+              <div *ngIf="forgotPasswordForm.controls['email'].invalid && forgotPasswordForm.controls['email'].touched || forgotPasswordForm.controls['email'].dirty" class="error-msg">
+                <div *ngIf="forgotPasswordForm.controls['email'].errors?.['email']" class="text-red text-sm pt-1">Invalid email.</div>
+                <div *ngIf="forgotPasswordForm.controls['email'].errors?.['required']" class="text-red text-sm pt-1">Email is required.</div>
+              </div>
+            </div>
+            <button
+              type="submit"
+              [disabled]="forgotPasswordForm.invalid"
+              class="w-full h-10 bg-darkpurple hover:bg-lightpurple text-white font-bold py-2 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+            >
+              Reset Password
+            </button>
+          </form>
+
+          <div class="mt-6 text-center">
+            <span class="text-sm">Remembered your password? <a (click)="openLogin()" class="text-darkpink hover:underline">Login</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-dialog>
+</div>
+
+<!-- Password - Reset - Popup -->
+<p-dialog
+  header=""
+  [(visible)]="visibleResetPassword"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="custom-dialog"
+>
+  <div class="flex flex-col max-w-lg w-full bg-bgpurple text-metawhite shadow-lg rounded-lg overflow-hidden">
+    <div class="p-8">
+      <div class="flex flex-col items-center">
+        <h2 class="text-2xl font-bold mb-6">Password Reset</h2>
+        <p class="text-center">Instructions to reset your password have been sent to (email). Please check your inbox (and spam folder).</p>
+        <button
+          type="button"
+          class="w-full h-10 bbg-darkpurple hover:bg-lightpurple text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 mt-6"
+          (click)="hideResetPassword()"
+        >
+          Continue
+        </button>
+      </div>
+    </div>
+  </div>
+</p-dialog>

@@ -1,0 +1,119 @@
+<div class="card  ">
+  <p-table
+    #dt2
+    [value]="customers"
+    dataKey="id"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [loading]="loading"
+    [paginator]="true"
+    [globalFilterFields]="['creator.name','invoice','amount', 'customer.name', 'status']"
+    [tableStyle]="{ 'min-width': '1100px' }"
+  >
+
+    <ng-template pTemplate="header">
+
+      <tr >
+        <th>
+          <p-columnFilter
+            type="text"
+            field="creator.name"
+            placeholder="Search by name"
+            ariaLabel="Filter Name" />
+        </th>
+        <th>
+
+        </th>
+        <th>
+          <p-columnFilter
+            type="text"
+            field="customer.name"
+            placeholder="Search by name"
+            ariaLabel="Filter Name" />
+        </th>
+        <th>
+
+        </th>
+        <th>
+          <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
+            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+              <p-dropdown
+                [options]="statuses"
+                [(ngModel)]="selectedStatus"
+                (onChange)="filter($event.value)"
+                placeholder="Select One"
+                [showClear]="true">
+                <ng-template let-option pTemplate="item">
+                  <p-tag
+                    [value]="option.value"
+                    [severity]="getSeverity(option.label)" />
+                </ng-template>
+              </p-dropdown>
+            </ng-template>
+          </p-columnFilter>
+        </th>
+      </tr>
+      <tr class="custom-header-row">
+        <th class="bg-lightpurple/15" pSortableColumn="creator.name" style="width:25%">
+          Creator <p-sortIcon field="creator.name" /></th>
+
+        <th class="bg-lightpurple/15" pSortableColumn="invoice" style="width:15%">
+          Invoice No <p-sortIcon field="invoice" /></th>
+
+        <th class="bg-lightpurple/15" pSortableColumn="customer.name" style="width:25%">
+          Models <p-sortIcon field="customer.name" />
+        </th>
+
+        <th class="bg-lightpurple/15" pSortableColumn="amount" style="width:15%">
+          Amount <p-sortIcon field="amount" />
+        </th>
+        <th class="bg-lightpurple/15"  style="width:15%;padding-left: 60px">Status</th>
+      </tr>
+    </ng-template>
+
+
+
+    <ng-template pTemplate="body" let-customer>
+      <tr>
+        <td class="flex flex-row gap-2">
+          <img
+            [alt]="customer.creator.name"
+            src="{{ customer.creator.image }}"
+            width="32"
+            style="vertical-align: middle" />
+          <span class="ml-1 vertical-align-middle">
+            {{ customer.creator.name }}
+          </span>
+        </td>
+        <td>
+          {{ customer.invoice }}
+
+        </td>
+        <td class="flex flex-row gap-2" >
+          <img
+            [alt]="customer.customer.name"
+            src="{{ customer.customer.image }}"
+            width="32"
+            style="vertical-align: middle" />
+            <span class="ml-1 vertical-align-middle">
+                    {{ customer.customer.name }}
+            </span>
+        </td>
+        <td>
+          {{customer.amount | currency:'USD':'symbol':'1.2-2'}}
+        </td>
+        <td  >
+          <p-tag
+            [style]="{ width: '70%'}"
+            [value]="customer.status"
+            [severity]="getSeverity(customer.status)" />
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="5">No customers found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
