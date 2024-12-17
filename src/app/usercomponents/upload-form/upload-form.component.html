@@ -31,58 +31,13 @@
               ></textarea>
             </div>
 
-            <!-- Upload 3D Model -->
-            <div class="mb-4">
-              <div class="file-upload">
-                <label class="block text-metawhite mb-2" for="modelFile">Upload Model:</label>
-                <input class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray" type="file" id="modelFile" (change)="onFileSelect($event, 'model')" />
-                <button class="block text-metawhite mb-2" type="button" (click)="uploadModel()">Upload</button>
-              </div>
-            </div>
-
-            <!-- <div>
-              <app-three-d-viewer [modelUrl]="dynamicModelUrl"></app-three-d-viewer>
-            </div> -->
-
-
-
-            <div class="parameters-section white-text" *ngIf="modelParameters">
-              <h3 class="text-lg mb-2">Model Parameters</h3>
-
-              <div *ngFor="let key of objectKeys(modelParameters)" class="mb-2 md:grid grid-cols-4 justify-between">
-                <strong>{{ key }}:</strong>
-                <!-- Handle Arrays -->
-                <ng-container *ngIf="isArray(modelParameters[key]); else singleValue">
-            <span *ngFor="let item of modelParameters[key]; let i = index">
-              <ng-container *ngIf="isBoolean(item); else showText">
-                <span *ngIf="item" class="text-green-500 font-semibold">✅</span>
-                <span *ngIf="!item" class="text-red-500 font-semibold">❌</span>
-              </ng-container>
-              <ng-template #showText>{{ item }}</ng-template>
-              <span *ngIf="i < modelParameters[key].length - 1">, </span>
-            </span>
-                </ng-container>
-                <!-- Handle Single Value -->
-                <ng-template #singleValue>
-                  <ng-container *ngIf="isBoolean(modelParameters[key]); else showSingleText">
-                    <span *ngIf="modelParameters[key]" class="text-green-500 font-semibold">✅</span>
-                    <span *ngIf="!modelParameters[key]" class="text-red-500 font-semibold">❌</span>
-                  </ng-container>
-                  <ng-template #showSingleText>{{ modelParameters[key] }}</ng-template>
-                </ng-template>
-              </div>
-
-            </div>
-
-
             <!-- Upload Images -->
             <div class="mb-4">
-              <label class="block text-metawhite mb-2">Upload Images (3)</label>
+              <label class="block text-metawhite mb-2">Upload Images</label>
               <input
                 class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
                 id="imageFile"
                 type="file"
-                multiple
                 (change)="onFileSelect($event, 'images')"
                 required
               />
@@ -97,17 +52,20 @@
                 name="category"
                 required
               >
-                <option value="1">Architectural</option>
-                <option value="2">Character</option>
-                <option value="3">Vehicles</option>
-                <option value="4">Furniture</option>
-                <option value="5">Nature</option>
-                <option value="6">Environment</option>
-                <option value="7">Props</option>
-                <option value="8">Weapons</option>
-                <option value="9">Animals</option>
+                <option value="" disabled selected>Select Category</option>
+                <option value="mens-wear">Men's Wear</option>
+                <option value="womens-wear">Women's Wear</option>
+                <option value="kids-wear">Kids' Wear</option>
+                <option value="casual-wear">Casual Wear</option>
+                <option value="formal-wear">Formal Wear</option>
+                <option value="sportswear">Sportswear</option>
+                <option value="traditional">Traditional Clothing</option>
+                <option value="accessories">Accessories</option>
+                <option value="footwear">Footwear</option>
+                <option value="custom-designs">Custom Designs</option>
+                <option value="boutique-collections">Boutique Collections</option>
               </select>
-            </div>
+            </div>            
 
             <!-- Tags -->
             <div class="mb-4">
@@ -120,70 +78,9 @@
               />
             </div>
 
-            <!-- Download Type -->
-            <div class="mb-4">
-              <label class="block text-metawhite mb-2">Download Type</label>
-              <select
-                class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
-                [(ngModel)]="formData.downloadType"
-                name="downloadType"
-                required
-              >
-                <option value="Free">Free</option>
-                <option value="Paid">Paid</option>
-              </select>
-            </div>
-
-            <!-- License -->
-             <!-- make licences as a dropdown -->
-             <div class="mb-4">
-              <label class="block text-metawhite mb-2">License</label>
-              <select
-                class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
-                [(ngModel)]="formData.license"
-                name="license"
-                required
-              >
-                <option value="CC0">CC0 (Public Domain Dedication)</option>
-                <option value="CC-BY">CC-BY (Attribution)</option>
-                <option value="CC-BY-SA">CC-BY-SA (Attribution-ShareAlike)</option>
-                <option value="CC-BY-NC">CC-BY-NC (Attribution-NonCommercial)</option>
-                <option value="CC-BY-NC-SA">CC-BY-NC-SA (Attribution-NonCommercial-ShareAlike)</option>
-                <option value="CC-BY-NC-ND">CC-BY-NC-ND (Attribution-NonCommercial-NoDerivs)</option>
-                <option value="GPL">GPL (GNU General Public License)</option>
-                <option value="LGPL">LGPL (Lesser General Public License)</option>
-                <option value="MIT">MIT (Open Source License)</option>
-                <option value="BSD">BSD (Berkeley Software Distribution License)</option>
-                <option value="Proprietary">Proprietary</option>
-              </select>
-            </div>
-
-            <!-- <div class="mb-4">
-              <label class="block text-metawhite mb-2">License</label>
-              <input
-                class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
-                [(ngModel)]="formData.license"
-                name="license"
-                type="text"
-                required
-              />
-            </div> -->
-
-            <!-- Format
-            <div class="mb-4">
-              <label class="block text-metawhite mb-2">Format</label>
-              <input
-                class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
-                [(ngModel)]="formData.format"
-                name="format"
-                type="text"
-                required
-              />
-            </div> -->
-
             <!-- Price -->
-            <div *ngIf="formData.downloadType === 'Paid'" class="mb-4">
-              <label class="block text-metawhite mb-2">Price</label>
+            <div class="mb-4">
+              <label class="block text-metawhite mb-2">Price (in USD)</label>
               <input
                 class="w-full p-2 bg-purple1 rounded border border-pink1 focus:border-pink1 text-darkgray"
                 [(ngModel)]="formData.price"
@@ -198,19 +95,10 @@
             <!-- Submit Button -->
             <div class="flex justify-center h-8 mt-4">
               <button
-                *ngIf="isValidModel === true"
                 class="bg-pink3 hover:bg-darkpurple text-metawhite w-1/3 h-8 text-lg mr-10 mt-4 rounded-lg font-bold py-2 px-10"
                 type="submit"
               >
                 Submit
-              </button>
-              <button
-                *ngIf="isValidModel === false"
-                class="bg-pink3 hover:bg-darkpurple text-metawhite w-1/3 h-8 text-lg mr-10 mt-4 rounded-lg font-bold py-2 px-10"
-                type="button"
-                (click)="requestModeratorReview()"
-              >
-                Request Moderator Review
               </button>
             </div>
           </form>

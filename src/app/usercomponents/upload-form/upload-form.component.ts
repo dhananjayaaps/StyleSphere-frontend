@@ -39,10 +39,8 @@ export class UploadFormComponent implements AfterViewInit {
   loadingParameters = false;
   isModelUploaded = false;
   modelId = '';
-  private readonly modelUploadUrl = 'http://localhost:3000/upload/model';
   private readonly imageUploadUrl = 'http://localhost:3000/upload/image';
   private readonly submitUrl = 'http://localhost:3000/vebxrmodel/';
-  private readonly moderatorRequestUrl = 'http://localhost:3000/review-requests';
 
   @ViewChild('modelPreviewCanvas', { static: false }) modelPreviewCanvas!: ElementRef<HTMLCanvasElement>;
 
@@ -80,103 +78,6 @@ export class UploadFormComponent implements AfterViewInit {
     }
   }
 
-  async uploadModel(): Promise<string> {
-    if (!this.formData.modelFile) {
-      this._toastService.warn('Please select a model to upload!');
-      return '';
-    }
-
-    const formData = new FormData();
-    formData.append('file', this.formData.modelFile);
-
-    try {
-      this.loadingParameters = true;
-
-      const response = await fetch(this.modelUploadUrl, {
-        method: 'POST',
-        body: formData,
-        credentials: 'include'
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to upload the model file');
-      }
-
-      const result = await response.json();
-      this.modelParameters = result.savedModel.parameters;
-      console.log('Model parameters:', result.savedModel);
-      // Update the validity status based on the response
-      this.isValidModel = result.savedModel.parameters.Valid;
-      this.modelId = result.savedModel.id;
-      this.dynamicModelUrl = result.fileAccessUrl;
-      this.isModelUploaded = true;
-
-      return result.fileAccessUrl;
-    } catch (error) {
-      console.error('Error uploading model:', error);
-      this._toastService.error('Failed to upload the model. Please try again.');
-      return '';
-    } finally {
-      this.loadingParameters = false;
-    }
-  }
-
-  // Function to request moderator review
-  async requestModeratorReview(): Promise<void> {
-
-    const modelUrl = this.dynamicModelUrl;
-
-    if (!modelUrl) {
-      this._toastService.error('Model upload failed.');
-      return;
-    }
-
-    if (this.formData.images.length !== 3) {
-      this._toastService.warn('Please upload at least 3 images.');
-      return;
-    }
-
-    //upload the images iteratively
-    for (let i = 0; i < this.formData.images.length; i++) {
-      this.formData.images[i] = await this.uploadImage(this.formData.images[i]);
-    }
-
-    //make a array for formdata.tags
-    let tagsArray = this.formData.tags.split(',');
-    this.formData.tags = tagsArray;
-
-    //make category as a number
-    this.formData.category = Number(this.formData.category);
-
-    //get the extention from the modelUrl. split by . and get the last element
-    let extention = modelUrl.split('.').pop();
-
-    const formData = {
-      ...this.formData,
-      modelUrl: modelUrl,
-      image1Url: this.formData.images[0],
-      image2Url: this.formData.images[1],
-      image3Url: this.formData.images[2],
-      modelId: this.modelId,
-      format: extention
-    };
-
-    try {
-      const response = await fetch(this.moderatorRequestUrl, {
-        method: 'POST',
-        body: JSON.stringify(formData),
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include'
-      });
-
-      if (!response.ok) throw new Error('Failed to submit the form');
-
-      this._toastService.success('Review Request Created successfully!');
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      this._toastService.error('Failed to submit the form.');
-    }
-  }
 
   async uploadImage(image: File): Promise<string> {
     const formData = new FormData();
@@ -236,9 +137,6 @@ export class UploadFormComponent implements AfterViewInit {
       ...this.formData,
       modelUrl: modelUrl,
       image1Url: this.formData.images[0],
-      image2Url: this.formData.images[1],
-      image3Url: this.formData.images[2],
-      modelId: this.modelId,
       format: extention
     };
 
