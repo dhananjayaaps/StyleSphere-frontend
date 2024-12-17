@@ -69,7 +69,7 @@ interface WithdrawalDetails {
     ChartModule,
     WeeklyRevenueChartComponent,
     SalesByCategoryPieChartComponent,
-    SellerNavbarComponent,
+    SellerNavbarComponent
   ],
   templateUrl: './user-transactions.component.html',
   styleUrls: ['./user-transactions.component.css'],
