@@ -6,137 +6,91 @@
 
 
   <!-- product -->
-  <div class="bg-purple1 mx-6 p-6 rounded-lg shadow-lg" *ngIf="data">
-    <a href="#" class="text-pink2 text-sm mb-4 inline-block"></a>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ">
-      <!-- <div class="flex items-center justify-center">
-        <app-three-d-viewer  [width]="700" [height]="450" [color_bg]="color_bg" [modelUrl]="data.model.modelUrl"></app-three-d-viewer>
+<div class="bg-purple1 mx-6 p-6 rounded-lg shadow-lg" *ngIf="data">
+  <a href="#" class="text-pink2 text-sm mb-4 inline-block"></a>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+    <div class="flex items-center justify-center">
+      <!-- Display the model image -->
+      <img
+        *ngIf="data.model.image1Url"
+        [src]="data.model.image1Url"
+        [alt]="data.model.title"
+        class="rounded-lg shadow-md"
+        width=400
+        height=250
+      />
+    </div>
+    <div class="ml-6">
+      <h2 class="text-2xl font-bold text-metawhite">
+        {{ data.model.title }}
+      </h2>
+      <p class="text-metawhite w-full max-h-[350px] pl-2 pr-6 mt-5 my-2">
+        {{ data.model.description }}.
+      </p>
+      <div class="mt-4 text-metawhite">
+        <div class="flex flex-wrap gap-2 mb-4 text-metawhite">
+          <span class="bg-secondary text-metawhite py-1 rounded-full mr-3">
+            <i class="pi pi-link" style="font-size: 1rem"></i>
+          </span>
+          <span
+            class="border-2 border-darkpink text-metawhite p-4 w-40 text-sm rounded-lg mb-5 h-8px-3 py-1">
+            {{ data.model.category.name }}
+          </span>
+        </div>
 
-      </div> -->
-      <div class="ml-6">
-        <!-- <button class="bg-s text-secondary-foreground hover:bg-secondary/80 mb-2">Save $10</button> -->
-        <h2 class="text-2xl font-bold text-metawhite">
-          {{data.model.title}}
-        </h2>
-        <p class="text-metawhite w-full max-h-[350px] pl-2 pr-6 mt-5 my-2">
-          {{data.model.description}}.
-        </p>
-        <div class="mt-4 text-metawhite">
-          <div class="lex flex-wrap gap-2 mb-4  text-metawhite">
-            <span class="bg-secondary text-metawhite  py-1 rounded-full mr-3"><i class="pi pi-link"
-                                                                                 style="font-size: 1rem"></i></span>
+        <div class="flex flex-wrap gap-2 mb-4 text-metawhite">
+          <span class="bg-secondary px-3 py-1 rounded-full mr-3">
+            <i class="pi pi-tags" style="font-size: 1rem"></i>
+          </span>
+          <div *ngFor="let tag of data.model.tags">
             <span
-              class="border-2 border-darkpink text-metawhite p-4 w-40  text-sm rounded-lg  mb-5 h-8px-3 py-1 ">{{data.model.category.name}}
+              class="bg-lightpurple font-semibold p-4 text-sm text-metawhite rounded-lg mb-5 h-8px-3 px-3 py-1">
+              {{ tag }}
             </span>
           </div>
-
-
-          <div class="flex flex-wrap gap-2 mb-4  text-metawhite"   >
-            <span class="bg-secondarypx-3 py-1 rounded-full mr-3"><i class="pi pi-tags" style="font-size: 1rem"></i></span>
-            <div *ngFor="let tag of data.model.tags">
-              <span class="bg-lightpurple font-semibold p-4  text-sm text-metawhite rounded-lg  mb-5 h-8px-3 px-3 py-1 ">{{tag}}</span>
-            </div>
-
-          </div>
-          <span class="text-xl font-semibold text-primary mb-5">{{data.model.price==0?"Free":data.model.price+" $"}}</span>
-          <p class="text-sm text-muted-foreground mb-2">Model code: {{data.model.id}}</p>
-          <div class="text-xs text-lightgray flex items-center text-center space-x-3">
-            <p-rating [(ngModel)]="data.model.review" [readonly]="true" [cancel]="false"></p-rating>
-            <span>{{data.model.review}}</span>
-            <span>{{getReviewCount()}} Reviews</span>
-            <span class="space-x-1"><i class="pi pi-heart-fill" style="font-size: 0.7rem"> </i>  {{data.model.likesCount}}</span>
-
-          </div>
-          <p class="w-fit text-xs text-sm text-metawhite mt-2 ">Published at {{data.model.createdAt | date:'mediumDate'}}</p>
-
         </div>
-        <div class="lg:flex items-center justify-between mt-4 ">
-
-          <div class="flex items-center space-x-5 mt-4 lg:mt-0">
-            <button
-              (click)="StartAnimation()"
-              class=" btn-down bg-[#0a0066] l  text-[16px] rounded-md hover:bg-[#060038] text-metawhite items-center text-center space-x-2">
-              <i class="pi pi-microchip-ai" style="font-size: 0.9rem"></i> Ask AI
-            </button>
-
-            <button *ngIf="data.isBought||data.model.price==0"
-                    (click)="DownloadModel(data.model.modelUrl)"
-                    type="button"
-                    class="btn-down bg-[#2564eb] rounded-md text-metawhite outline-none  shadow-lg transform active:scale-x-75 transition-transform mx-5 flex"
-            >
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-
-              <span class="ml-2">Download</span>
-            </button>
-            <button (click)="AddToCart(data.model.id)" *ngIf="!data.isBought&&data.model.price!=0"
-                    class="bg-lightpurple p-4 h-8 w-32 py-2 text-sm rounded-xl hover:bg-darkpurple text-metawhite items-center text-center space-x-2">
-              <i class="pi pi-shopping-cart" style="font-size: 0.9rem"></i> Add to Cart
-            </button>
-
-          </div>
+        <span class="text-xl font-semibold text-primary mb-5">
+          {{ data.model.price == 0 ? 'Free' : data.model.price + ' $' }}
+        </span>
+        <p class="text-sm text-muted-foreground mb-2">
+          Model code: {{ data.model.id }}
+        </p>
+        <div class="text-xs text-lightgray flex items-center text-center space-x-3">
+          <p-rating
+            [(ngModel)]="data.model.review"
+            [readonly]="true"
+            [cancel]="false">
+          </p-rating>
+          <span>{{ data.model.review }}</span>
+          <span>{{ getReviewCount() }} Reviews</span>
+          <span class="space-x-1">
+            <i class="pi pi-heart-fill" style="font-size: 0.7rem"></i>
+            {{ data.model.likesCount }}
+          </span>
+        </div>
+        <p class="w-fit text-xs text-sm text-metawhite mt-2">
+          Listed at {{ data.model.createdAt | date: 'mediumDate' }}
+        </p>
+      </div>
+      <div class="lg:flex items-center justify-between mt-4">
+        <div class="flex items-center space-x-5 mt-4 lg:mt-0">
+          <button
+            (click)="AddToCart(data.model.id)"
+            class="bg-lightpurple p-4 h-8 w-32 py-2 text-sm rounded-xl hover:bg-darkpurple text-metawhite items-center text-center space-x-2">
+            <i class="pi pi-shopping-cart" style="font-size: 0.9rem"></i> Add to Cart
+          </button>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="flex items-center mt-4" >
-      </div>
+  <div class="flex items-center mt-4"></div>
+</div>
 
-  </div >
 
   <!-- tabs -->
   <div class="bg-purple1 mx-6 mt-3  p-6 rounded-lg shadow-lg" *ngIf="data">
     <p-tabView selectOnFocus="true">
-
-      <p-tabPanel header="Advanced Information">
-        <div class="p-2 lg:p-6 rounded-lg shadow-lg text-sm">
-          <div *ngFor="let model of models">
-
-            <div *ngIf="model">
-              <div class="bg-darkpink text-metawhite  rounded-t-lg  hidden md:grid grid-cols-6 justify-between ">
-                                <h3 class="font-bold text-lg w-full h-full bg-pink3 pl-4 py-4 rounded-tl-lg">Feature</h3>
-                                <h3 class="font-bold text-lg pl-4 py-4">Details</h3>
-                              </div>
-              <div  *ngFor="let key of objectKeys(model)" class="bg-lightpurple text-metawhite px-4 py-2 rounded-lg grid grid-cols-6 justify-between">
-                <span><strong>{{ key }}:</strong></span>
-                <!-- Handle Arrays -->
-                <ng-container *ngIf="isArray(model[key]); else singleValue">
-            <span *ngFor="let item of model[key]; let i = index">
-              <ng-container *ngIf="isBoolean(item); else showText">
-                <span *ngIf="item" class="text-green-500 font-semibold">✅</span>
-                <span *ngIf="!item" class="text-red-500 font-semibold">❌</span>
-              </ng-container>
-              <ng-template #showText>{{ item }}</ng-template>
-              <span *ngIf="i < model[key].length - 1">, </span>
-            </span>
-                </ng-container>
-                <!-- Handle Single Value -->
-                <ng-template #singleValue>
-                  <ng-container *ngIf="isBoolean(model[key]); else showSingleText">
-                    <span *ngIf="model[key]" class="text-green-500 font-semibold">✅</span>
-                    <span *ngIf="!model[key]" class="text-red-500 font-semibold">❌</span>
-                  </ng-container>
-                  <ng-template #showSingleText>{{ model[key] }}</ng-template>
-                </ng-template>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
-<!--              <div class="bg-darkpink text-metawhite p-4 rounded-t-lg  hidden md:grid grid-cols-2 justify-between ">-->
-<!--                <h3 class="font-bold text-lg">Feature</h3>-->
-<!--                <h3 class="font-bold text-lg">Details</h3>-->
-<!--              </div>-->
-
-<!--              <div class="bg-lightpurple text-metawhite px-4 py-2 rounded-lg grid grid-cols-2 justify-between">-->
-<!--                <span class="font-semibold">Scale Transformation :</span>-->
-<!--                <span>No</span>-->
-<!--              </div>-->
-            </div>
-          </div>
-
-        </div>
-      </p-tabPanel>
       <p-tabPanel header="Review">
         <div class="grid grid-cols-1 md:grid-cols-2  mb-6 ">
           <div class=" flex p-6  col-span-1 border-r-0 md:border-r-4 md:border-darkpink md:justify-center md:items-center ">
@@ -226,22 +180,9 @@
             <p class="text-metawhite mb-4 text-sm">
               {{onereview.reviewMessage}}
             </p>
-            <!-- <div class="flex justify-between items-center">
-              <span class="text-sm text-muted-foreground">17 people found this helpful</span>
-              <div class="flex space-x-2">
-                <button
-                  class="bg-secondary text-secondary-foreground hover:bg-secondary/80 px-2 py-1 rounded">Helpful</button>
-                <button
-                  class="bg-destructive text-destructive-foreground hover:bg-destructive/80 px-2 py-1 rounded">Report</button>
-              </div>
-            </div> -->
-
           </div>
 
         </div>
-
-
-
 
         <div class=" p-6 " *ngIf="!data.amIreviewed">
           <h2 class="text-2xl font-bold text-darkpink">Review this Product</h2>
@@ -252,10 +193,8 @@
           <h2 class="text-2xl font-bold text-darkpink">You Already Reviewed to this Product</h2>
           </div>
 
-
-
       </p-tabPanel>
-      <p-tabPanel header="Creator Details">
+      <p-tabPanel header="Seller Details">
         <div class="p-6 rounded-lg shadow-lg">
           <div class="flex items-center mb-4 md:mt-4">
             <img
@@ -274,22 +213,11 @@
           <p class="list-disc list-inside mb-4 text-metawhite"><i class="pi pi-facebook" style="font-size: 1rem"> </i> Facebook  : &#64;{{data.model.modelOwner.facebookUsername}}</p>
           <p class="list-disc list-inside mb-4 text-metawhite"><i class="pi pi-twitter" style="font-size: 1rem"></i> Twitter : &#64;{{data.model.modelOwner.twitterUsername}}</p>
           <p class="list-disc list-inside mb-4 text-metawhite"><i class="pi pi-linkedin" style="font-size: 1rem"></i> LinkedIn : &#64;{{data.model.modelOwner.linkedInUsername}}</p>
-
-
-
-
-
-
-
         </div>
       </p-tabPanel>
     </p-tabView>
   </div>
-
-
 </div>
-
-
 
 <!-- review - form -->
 <div class="flex justify-center">
@@ -309,8 +237,6 @@
           <p-rating formControlName="reviewStars" [cancel]="false" />
         </div>
 
-
-
         <div class="card flex justify-center pt-3">
           <p-floatLabel>
             <textarea
@@ -325,11 +251,6 @@
 
           </p-floatLabel>
         </div>
-
-
-
-
-
         <div class="flex items-center">
           <button (click)="postReview()" class="w-1/3 h-8 mx-auto bg-darkpurple text-metawhite py-2 rounded-lg hover:bg-primary/80">Post Your Review</button>
         </div>
@@ -339,52 +260,5 @@
     </div>
   </p-dialog>
 
-
-  <p-dialog header="" [(visible)]="AskAIForm" [modal]="true" [draggable]="false"
-            [resizable]="false" styleClass="custom-dialog">
-
-    <div class=" min-w-[500px] max-w-[500px] min-h-[400px] bg-purple1  rounded-lg shadow-lg w-full max-w-4xl max-h-full overflow-x-scroll no-scrollbar">
-      <div class="flex justify-between items-center mb-4 bg-gradient-to-r from-purple2 to-darkpink">
-        <div class="flex items-center p-4">
-          <h2 class="text-metawhite text-xl font-semibold">Get More Info From AI</h2>
-        </div>
-      </div>
-      <div *ngIf="!requested" class="w-full flex justify-center">
-        <img class="w-56 box"  src="https://i.ibb.co/yR8VGZt/Pngtree-3d-bot-ai-powered-marketing-12994874.png">
-      </div>
-      <form *ngIf="!requested" class="space-y-4 mx-6 mb-6 text-sm" [formGroup]="question">
-        <div class="card flex justify-center pt-3">
-          <p-floatLabel>
-            <textarea
-              class="text-area"
-              rows="3"
-              cols="30"
-              pInputTextarea
-              [autoResize]="true"
-              formControlName="question"
-
-            >
-            </textarea>
-            <label class="text-metawhite align-middle">Question</label>
-
-          </p-floatLabel>
-        </div>
-
-        <div class="flex items-center" >
-          <button  (click)="SendAI()" class="w-1/3 h-8 mx-auto bg-darkpurple text-metawhite py-2 rounded-lg hover:bg-primary/80">Ask</button>
-        </div>
-      </form>
-
-      <div *ngIf="requested"  class=" flex flex-col gap-3 justify-center px-8 py-5">
-        <div class="flex flex-col items-start" *ngFor="let par of AiAnswer.responce">
-          <p class="text-metawhite">{{par}}</p>
-        </div>
-        <button *ngIf="askAnother" (click)="requested=false" class="w-1/3 h-8 mx-auto bg-darkpurple text-metawhite py-2 rounded-lg hover:bg-primary/80">Ask Another</button>
-      </div>
-
-    </div>
-  </p-dialog>
-</div>
-
-<!--   footer   -->
-<app-footer></app-footer>
+  <!-- footer  
+<app-footer></app-footer> -->
