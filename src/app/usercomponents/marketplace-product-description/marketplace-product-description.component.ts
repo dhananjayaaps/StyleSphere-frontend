@@ -30,7 +30,6 @@ import {animate, style, transition, trigger} from "@angular/animations";
   standalone: true,
   imports: [
     UserNavbarComponent,
-    FooterComponent,
     FormsModule,
     RatingModule,
     InputNumberModule,

@@ -4,10 +4,6 @@ import { FooterComponent } from "../footer/footer.component";
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import {ToastService} from "angular-toastify";
 import { Router } from '@angular/router';
 import {SellerNavbarComponent} from "../seller-navbar/seller-navbar.component";
@@ -15,7 +11,7 @@ import {SellerNavbarComponent} from "../seller-navbar/seller-navbar.component";
 @Component({
   selector: 'app-upload-form',
   standalone: true,
-  imports: [UserNavbarComponent, FooterComponent, SelectButtonModule, CommonModule, FormsModule, SellerNavbarComponent],
+  imports: [FooterComponent, SelectButtonModule, CommonModule, FormsModule, SellerNavbarComponent],
   templateUrl: './upload-form.component.html',
   styleUrls: ['./upload-form.component.css']
 })
@@ -100,6 +96,17 @@ export class UploadFormComponent implements AfterViewInit {
   
   async onSubmit(event: Event): Promise<void> {
     event.preventDefault();
+
+    if (!this.formData.category || this.formData.category === '') {
+      this._toastService.warn('Please select a valid category.');
+      return;
+    }
+
+    // Check if price is greater than 0
+    if (this.formData.price <= 0) {
+      this._toastService.warn('Price must be greater than 0.');
+      return;
+    }
   
     // Ensure there's at least one image.
     if (this.formData.images.length !== 1) {

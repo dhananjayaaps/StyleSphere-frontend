@@ -83,11 +83,20 @@ export class MarketplaceProductsComponent implements OnInit {
 
   AiSearchResults!: AISearchResponse[] ;
 
-  categories: string[] = ['Any', 'Architectural', 'Character', 'Vehicles', 'Furniture', 'Nature', 'Environment', 'Props', 'Weapons', 'Animals'];
-  formats: string[] = ['Any', 'GLB', 'OBJ', 'GLTF'];
-  licenses: string[] = [
-    'Any', 'CC0', 'CC-BY', 'CC-BY-SA', 'CC-BY-NC', 'CC-BY-NC-SA', 'CC-BY-NC-ND', 'GPL', 'LGPL', 'MIT', 'BSD', 'Proprietary'
-  ];
+  categories: string[] = [
+    "Select Category",
+    "Men's Wear",
+    "Women's Wear",
+    "Kids' Wear",
+    "Casual Wear",
+    "Formal Wear",
+    "Sportswear",
+    "Traditional Clothing",
+    "Accessories",
+    "Footwear",
+    "Custom Designs",
+    "Boutique Collections",
+  ];  
   ratings: string[] = ['Any', '1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'];
   sortOptions: string[] = ['Relevance', 'Price: Low to High', 'Price: High to Low'];
 
@@ -214,54 +223,6 @@ export class MarketplaceProductsComponent implements OnInit {
   navigateToDescription(modelId: number): void {
     this.router.navigate(['/marketplace-product-description'],{ queryParams: { id: modelId } });
   }
-
-  isLoading=false;
-  SearchAI() {
-    if (this.request.invalid) {
-      console.log('Invalid AI search request');
-      return;
-    }
-    this.isLoading=true;
-    this.http.post<AISearchResponse[]>(BASE_url+'/vebxrmodel/searchwithAi', this.request.value).subscribe({
-      next: (response) => {
-        this.AiSearchResults = response;
-        this.isLoading=false;
-        console.log(this.AiSearchResults);
-      },
-      error: (error) => {
-        console.error('Error fetching AI search results:', error);
-      },
-    });
-
-  }
-
-  getSeerveritybyScore(score: number) {
-
-    if (score < 0.3) {
-      return 'danger';
-    } else if (score < 0.4) {
-      return 'warning';
-    } else if (score < 0.5) {
-      return 'secondary';
-    } else if (score < 0.7) {
-      return 'info';
-    }else {
-      return 'success';
-    }
-  }
-  getSerevitybyFrequency(frequency: number) {
-
-    if (frequency < 1) {
-      return 'warning';
-    } else if (frequency < 2) {
-      return 'info';
-    }else if (frequency < 3) {
-      return 'success';
-    }else {
-      return 'success';
-    }
-  }
-
 
 
 }
